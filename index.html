@@ -42,7 +42,26 @@ table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e5e9
 <div class="card"><div class="label">Lessons completed</div><div class="value" id="completed">0</div></div>
 <div class="card"><div class="label">Teaching hours</div><div class="value" id="hours">0h</div></div>
 </div>
-<div class="toolbar"><button class="primary" onclick="generateWeek()">Generate this week's recurring lessons</button><button onclick="exportCSV()">Export CSV</button></div>
+<div class="toolbar">
+<label style="font-size:13px;color:#657084">Week starting Monday:</label><input type="date" id="weekPicker" onchange="syncWeekPicker()">
+<button class="primary" onclick="generateSelectedWeek()">Generate selected week</button>
+<button onclick="generateRelativeWeek(-7)">Generate last week</button>
+<button onclick="generateRelativeWeek(0)">Generate this week</button>
+<button onclick="exportCSV()">Export CSV</button>
+</div>
+<div class="form" style="margin-top:10px">
+<strong>Quick add a past/one-off lesson</strong>
+<div class="sub" style="margin:4px 0 12px">Use this for a lesson that wasn't part of your recurring schedule. Then tick <b>Done</b> and <b>Paid</b> in Lessons.</div>
+<div class="formgrid">
+<div><label>Date</label><input id="mDate" type="date"></div>
+<div><label>Time</label><input id="mTime" type="time"></div>
+<div><label>Student</label><select id="mStudent"></select></div>
+<div><label>Subject</label><input id="mSubject" placeholder="Math"></div>
+<div><label>Fee (€)</label><input id="mPrice" type="number" step=".01" placeholder="8"></div>
+<div><label>Duration (minutes)</label><input id="mDuration" type="number" placeholder="60"></div>
+</div>
+<button class="primary" style="margin-top:14px" onclick="addManualLesson()">Add lesson</button>
+</div>
 <div id="dashTable"></div>
 </section>
 
@@ -102,20 +121,40 @@ if(!n||!sub||!p||!dur||!days.length)return alert('Fill all fields and choose at 
 state.students.push({name:n,subject:sub,price:p,duration:dur,days});save();sName.value=sSubject.value=sPrice.value=sDuration.value='';document.querySelectorAll('#days input').forEach(x=>x.checked=false);renderAll()
 }
 function deleteStudent(i){if(confirm('Delete this student?')){state.students.splice(i,1);save();renderAll()}}
-function generateWeek(){
-let start=new Date();start.setDate(start.getDate()-start.getDay()+1);
-for(let i=0;i<7;i++){let d=new Date(start);d.setDate(start.getDate()+i);let date=iso(d);
-state.students.forEach((s,si)=>{let day=d.getDay();if(s.days.includes(day)&&!state.lessons.some(l=>l.date===date&&l.student===s.name)){
-let times={}; // current known schedule
-let slots={
-'Trung':{2:'19:00',6:'15:00'},'Jesica':{2:'20:20',6:'12:00',0:'12:00'},
-'Brians/Adaline':{3:'19:00',5:'19:00',0:'18:00'},'Hiep':{4:'19:30',6:'19:30'},
-'Anna':{5:'17:30',0:'16:00'},'Vy':{6:'11:00'},'An':{6:'14:00',0:'14:00'},
-'Hieu':{0:'09:00'},'Tuong':{1:'19:15',3:'17:10'},'Quan + Thu':{1:'20:00',5:'16:15'}
+const recurringSlots={
+'Trung':{2:{time:'19:00',subject:'Math',price:8,duration:60},6:{time:'15:00',subject:'Math',price:8,duration:60}},
+'Jesica':{2:{time:'20:20',subject:'Math',price:7,duration:40},6:{time:'12:00',subject:'Latvian',price:7,duration:40},0:{time:'12:00',subject:'Science',price:6,duration:40}},
+'Brians/Adaline':{3:{time:'19:00',subject:'Latvian',price:18,duration:90},5:{time:'19:00',subject:'Latvian',price:18,duration:90},0:{time:'18:00',subject:'Latvian',price:18,duration:90}},
+'Hiep':{4:{time:'19:30',subject:'Latvian',price:15,duration:90},6:{time:'19:30',subject:'Latvian',price:15,duration:90}},
+'Anna':{5:{time:'17:30',subject:'Latvian',price:11,duration:90},0:{time:'16:00',subject:'Latvian',price:11,duration:90}},
+'Vy':{6:{time:'11:00',subject:'Math',price:9,duration:60}},
+'An':{6:{time:'14:00',subject:'Latvian',price:5,duration:60},0:{time:'14:00',subject:'Latvian',price:5,duration:60}},
+'Hieu':{0:{time:'09:00',subject:'Latvian',price:10,duration:90}},
+'Tuong':{1:{time:'19:15',subject:'Latvian',price:5,duration:40},3:{time:'17:10',subject:'Latvian',price:5,duration:40}},
+'Quan + Thu':{1:{time:'20:00',subject:'English',price:11,duration:60},5:{time:'16:15',subject:'English',price:11,duration:60}}
 };
-state.lessons.push({date,student:s.name,subject:s.subject,time:(slots[s.name]||{})[day]||'--:--',duration:s.duration,price:s.price,done:false,paid:false});
-}})}
-save();renderAll();alert('This week generated.')}
+function mondayOf(d){let x=new Date(d);x.setHours(12,0,0,0);let day=x.getDay();x.setDate(x.getDate()-(day===0?6:day-1));return x}
+function dateInputValue(d){return iso(mondayOf(d))}
+function generateWeek(startDate){
+let start=mondayOf(startDate);let added=0;
+for(let i=0;i<7;i++){
+ let d=new Date(start);d.setDate(start.getDate()+i);let date=iso(d),day=d.getDay();
+ state.students.forEach(s=>{
+   let slot=(recurringSlots[s.name]||{})[day];
+   if(!slot || state.lessons.some(l=>l.date===date&&l.student===s.name&&l.time===slot.time)) return;
+   state.lessons.push({date,student:s.name,subject:slot.subject||s.subject,time:slot.time,duration:slot.duration||s.duration,price:slot.price??s.price,done:false,paid:false});added++;
+ });
+}
+save();renderAll();return added;
+}
+function generateSelectedWeek(){let d=weekPicker.value;if(!d)return alert('Choose a Monday week first.');let added=generateWeek(dateObj(d));alert(`${added} lesson${added===1?'':'s'} added for ${d} → ${iso(new Date(dateObj(d).getTime()+6*86400000))}.`)}
+function generateRelativeWeek(offset){let d=new Date();d.setDate(d.getDate()+offset);let monday=dateInputValue(d);weekPicker.value=monday;let added=generateWeek(d);alert(`${added} lesson${added===1?'':'s'} added for ${monday} → ${iso(new Date(dateObj(monday).getTime()+6*86400000))}.`)}
+function syncWeekPicker(){ }
+function addManualLesson(){
+ let date=mDate.value,time=mTime.value,student=mStudent.value,subject=mSubject.value.trim(),price=+mPrice.value,duration=+mDuration.value;
+ if(!date||!time||!student||!subject||!price||!duration)return alert('Fill in date, time, student, subject, fee and duration.');
+ state.lessons.push({date,time,student,subject,price,duration,done:false,paid:false});save();mSubject.value=mPrice.value=mDuration.value='';renderAll();filterDate.value=date;renderLessons();alert('Lesson added.');
+}
 function renderStudents(){
 let html='<table><tr><th>Student</th><th>Subject</th><th>Price</th><th>Duration</th><th>Days</th><th></th></tr>';
 state.students.forEach((s,i)=>html+=`<tr><td><strong>${s.name}</strong></td><td>${s.subject}</td><td>${money(s.price)}</td><td>${s.duration} min</td><td>${s.days.map(x=>dow[x]).join(', ')}</td><td><button onclick="deleteStudent(${i})">Delete</button></td></tr>`);
@@ -150,6 +189,8 @@ let rows=[['Date','Time','Student','Subject','Duration','Fee','Completed','Paid'
 let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(',')).join('\\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='teaching-schedule.csv';a.click()
 }
 function renderAll(){
+let today=new Date(); if(document.getElementById('weekPicker')&&!document.getElementById('weekPicker').value)document.getElementById('weekPicker').value=dateInputValue(today);
+let ms=document.getElementById('mStudent'); if(ms){let old=ms.value;ms.innerHTML=state.students.map(s=>`<option>${s.name}</option>`).join('');if(old&&[...ms.options].some(o=>o.value===old))ms.value=old;}
 document.getElementById('days').innerHTML=dow.slice(1).map((d,i)=>`<label style="display:inline-block;margin:6px 12px 0 0"><input type="checkbox" value="${i+1}"> ${d}</label>`).join('')+'<label style="display:inline-block;margin:6px 12px 0 0"><input type="checkbox" value="0"> Sun</label>';
 let fs=document.getElementById('filterStudent');let old=fs.value;fs.innerHTML='<option value="">All students</option>'+state.students.map(s=>`<option>${s.name}</option>`).join('');fs.value=old;
 renderDash();renderStudents();renderLessons();renderCalendar()
