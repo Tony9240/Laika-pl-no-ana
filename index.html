@@ -1,201 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Teaching Planner</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7fb;color:#172033}
-header{background:#fff;border-bottom:1px solid #e4e8f0;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
-h1{font-size:22px;margin:0}.sub{color:#6b7280;font-size:13px;margin-top:3px}
-nav{display:flex;gap:8px;flex-wrap:wrap}.navbtn{border:0;background:#eef2f7;padding:9px 13px;border-radius:9px;cursor:pointer;font-weight:600}.navbtn.active{background:#172033;color:white}
-main{max-width:1200px;margin:auto;padding:24px}.page{display:none}.page.active{display:block}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}.card{background:#fff;border:1px solid #e5e9f0;border-radius:14px;padding:17px}.label{font-size:12px;color:#6b7280}.value{font-size:27px;font-weight:750;margin-top:5px}
-.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.toolbar input,.toolbar select,.toolbar button,input,select{padding:9px 10px;border:1px solid #d8dee8;border-radius:8px;background:white}
-button{cursor:pointer}.primary{background:#172033;color:white;border:0;padding:10px 14px;border-radius:9px;font-weight:650}
-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e5e9f0;border-radius:12px;overflow:hidden}th,td{padding:11px 12px;border-bottom:1px solid #edf0f4;text-align:left;font-size:14px}th{background:#f8fafc;font-size:12px;color:#657084}tr:last-child td{border-bottom:0}
-.badge{padding:4px 8px;border-radius:20px;font-size:12px;font-weight:650}.done{background:#dcfce7;color:#166534}.pending{background:#fff7ed;color:#9a3412}.paid{background:#dcfce7;color:#166534}.unpaid{background:#fee2e2;color:#991b1b}
-.check{width:18px;height:18px}.actions button{margin-right:5px}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{background:#fff;border:1px solid #e5e9f0;border-radius:12px;min-height:150px;padding:10px}.day h3{font-size:13px;margin:0 0 8px}.lesson{font-size:12px;border-left:3px solid #64748b;background:#f8fafc;padding:7px;margin:6px 0;border-radius:5px}.lesson.donebox{opacity:.55}.lesson strong{display:block}
-.form{background:#fff;border:1px solid #e5e9f0;border-radius:14px;padding:18px;margin-bottom:16px}.formgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.form label{font-size:12px;color:#657084;display:block;margin-bottom:5px}.form input,.form select{width:100%}
-.empty{padding:35px;text-align:center;color:#6b7280;background:#fff;border:1px dashed #d7dce5;border-radius:12px}
-@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.day{min-height:auto}}
-@media(max-width:500px){main{padding:14px}.cards{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}header{padding:14px}.value{font-size:22px}}
-</style>
-</head>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e5e7eb;--primary:#2563eb;--green:#16a34a;--yellow:#ca8a04;--red:#dc2626;--shadow:0 4px 18px #0000000d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.header{max-width:1200px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800;font-size:21px}.tabs{display:flex;gap:8px;overflow:auto;padding:8px 20px;max-width:1200px;margin:auto}.tab,.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer}.tab{background:#eef2ff}.tab.active,.primary{background:var(--primary);color:white}.secondary{background:#eef2f7;color:var(--text)}.success{background:#dcfce7;color:#166534}.warning{background:#fef3c7;color:#92400e}.danger{background:#fee2e2;color:#991b1b}.container{max-width:1200px;margin:auto;padding:20px 20px 90px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat,.card,.lesson,.day{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.stat{padding:17px}.stat b{display:block;font-size:26px;margin-top:4px}.card{padding:18px;margin-top:16px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.muted{color:var(--muted);font-size:13px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label,label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}input,select{width:100%;padding:10px;border:1px solid #d5d9e2;border-radius:9px;background:#fff;font:inherit}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.lesson{padding:14px;margin:10px 0;border-left:5px solid var(--primary)}.lesson.done{border-left-color:var(--green)}.lesson.cancelled{border-left-color:var(--red);opacity:.7}.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;margin:3px}.planned{background:#dbeafe;color:#1d4ed8}.donebadge{background:#dcfce7;color:#166534}.unpaid{background:#fef3c7;color:#92400e}.cancel{background:#fee2e2;color:#991b1b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{min-height:190px;padding:8px}.dayhead{font-weight:800;border-bottom:1px solid var(--line);padding-bottom:7px;margin-bottom:7px}.mini{font-size:12px;background:#f8fafc;border-radius:8px;padding:7px;margin:6px 0;cursor:pointer}.mini.cancelled{text-decoration:line-through;opacity:.55}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}.empty{text-align:center;color:var(--muted);padding:24px}.fab{position:fixed;right:22px;bottom:70px;width:58px;height:58px;border:0;border-radius:50%;background:var(--primary);color:#fff;font-size:28px;box-shadow:0 8px 25px #0003;z-index:20}.bottom{display:none}.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.show{display:flex}.modalbox{background:#fff;border-radius:16px;max-width:620px;width:100%;max-height:90vh;overflow:auto;padding:20px}@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr 1fr}.calendar{grid-template-columns:1fr}.day{min-height:auto}.tabs{display:none}.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:15;justify-content:space-around;padding:7px}.bottom button{border:0;background:none;font-size:12px;font-weight:700}.container{padding:15px 13px 90px}}@media(max-width:500px){.grid,.formgrid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.stat b{font-size:21px}}
+</style></head>
 <body>
-<header>
-<div><h1>Teaching Planner</h1><div class="sub">Lessons · attendance · payments · income</div></div>
-<nav>
-<button class="navbtn active" onclick="show('dashboard',this)">Dashboard</button>
-<button class="navbtn" onclick="show('calendar',this)">Calendar</button>
-<button class="navbtn" onclick="show('students',this)">Students</button>
-<button class="navbtn" onclick="show('lessons',this)">Lessons</button>
-</nav>
-</header>
-<main>
-<section id="dashboard" class="page active">
-<h2>Dashboard</h2>
-<div class="cards">
-<div class="card"><div class="label">This month's completed income</div><div class="value" id="income">€0</div></div>
-<div class="card"><div class="label">Unpaid</div><div class="value" id="unpaid">€0</div></div>
-<div class="card"><div class="label">Lessons completed</div><div class="value" id="completed">0</div></div>
-<div class="card"><div class="label">Teaching hours</div><div class="value" id="hours">0h</div></div>
-</div>
-<div class="toolbar">
-<label style="font-size:13px;color:#657084">Week starting Monday:</label><input type="date" id="weekPicker" onchange="syncWeekPicker()">
-<button class="primary" onclick="generateSelectedWeek()">Generate selected week</button>
-<button onclick="generateRelativeWeek(-7)">Generate last week</button>
-<button onclick="generateRelativeWeek(0)">Generate this week</button>
-<button onclick="exportCSV()">Export CSV</button>
-</div>
-<div class="form" style="margin-top:10px">
-<strong>Quick add a past/one-off lesson</strong>
-<div class="sub" style="margin:4px 0 12px">Use this for a lesson that wasn't part of your recurring schedule. Then tick <b>Done</b> and <b>Paid</b> in Lessons.</div>
-<div class="formgrid">
-<div><label>Date</label><input id="mDate" type="date"></div>
-<div><label>Time</label><input id="mTime" type="time"></div>
-<div><label>Student</label><select id="mStudent"></select></div>
-<div><label>Subject</label><input id="mSubject" placeholder="Math"></div>
-<div><label>Fee (€)</label><input id="mPrice" type="number" step=".01" placeholder="8"></div>
-<div><label>Duration (minutes)</label><input id="mDuration" type="number" placeholder="60"></div>
-</div>
-<button class="primary" style="margin-top:14px" onclick="addManualLesson()">Add lesson</button>
-</div>
-<div id="dashTable"></div>
-</section>
-
-<section id="calendar" class="page">
-<h2>Calendar</h2>
-<div class="toolbar"><button onclick="moveWeek(-1)">← Previous</button><strong id="weekTitle"></strong><button onclick="moveWeek(1)">Next →</button></div>
-<div class="grid" id="calendarGrid"></div>
-</section>
-
-<section id="students" class="page">
-<h2>Students</h2>
-<div class="form">
-<div class="formgrid">
-<div><label>Name</label><input id="sName" placeholder="e.g. Trung"></div>
-<div><label>Subject</label><input id="sSubject" placeholder="Math"></div>
-<div><label>Price (€)</label><input id="sPrice" type="number" step=".01" placeholder="8"></div>
-<div><label>Duration (minutes)</label><input id="sDuration" type="number" placeholder="60"></div>
-</div>
-<div style="margin-top:12px"><label>Recurring days</label>
-<div id="days"></div></div>
-<button class="primary" style="margin-top:14px" onclick="addStudent()">Add student</button>
-</div>
-<div id="studentTable"></div>
-</section>
-
-<section id="lessons" class="page">
-<h2>Lessons</h2>
-<div class="toolbar"><input type="date" id="filterDate" onchange="renderLessons()"><select id="filterStudent" onchange="renderLessons()"><option value="">All students</option></select><button onclick="clearFilters()">Clear</button></div>
-<div id="lessonTable"></div>
-</section>
-</main>
+<header><div class="header"><div class="brand">📚 Teaching Planner</div><button class="btn secondary" onclick="showTab('settings')">⚙️</button></div><div class="tabs"><button class="tab active" data-tab="home">🏠 Home</button><button class="tab" data-tab="calendar">📅 Calendar</button><button class="tab" data-tab="lessons">📚 Lessons</button><button class="tab" data-tab="students">👥 Students</button><button class="tab" data-tab="income">💰 Income</button><button class="tab" data-tab="settings">⚙️ Settings</button></div></header>
+<main class="container">
+<section id="home" class="page"><h2>Dashboard</h2><div class="grid" id="stats"></div><div class="card"><div class="row between"><h3>Today</h3><button class="btn primary" onclick="openAdd()">＋ Add lesson</button></div><div id="today"></div></div><div class="card"><h3>Upcoming</h3><div id="upcoming"></div></div></section>
+<section id="calendar" class="page" hidden><div class="row between"><div><h2>Calendar</h2><p class="muted">Generate only missing recurring lessons.</p></div><div class="row"><input id="weekPicker" type="date" onchange="renderCalendar()"><button class="btn primary" onclick="generateWeek()">Generate week</button></div></div><div class="calendar" id="calendarGrid"></div></section>
+<section id="lessons" class="page" hidden><div class="row between"><div><h2>Lessons</h2><p class="muted">Edit, complete, pay, cancel, reschedule or delete.</p></div><button class="btn primary" onclick="openAdd()">＋ Add lesson</button></div><div class="card"><div class="formgrid"><div><label>Search</label><input id="search" placeholder="Student or subject" oninput="renderLessons()"></div><div><label>Status</label><select id="statusFilter" onchange="renderLessons()"><option value="all">All</option><option value="planned">Planned</option><option value="done">Completed</option><option value="unpaid">Unpaid</option><option value="cancelled">Cancelled</option></select></div><div><label>Month</label><input id="monthFilter" type="month" onchange="renderLessons()"></div></div></div><div id="lessonList"></div></section>
+<section id="students" class="page" hidden><div class="row between"><h2>Students</h2><button class="btn primary" onclick="openStudent()">＋ Student</button></div><div class="card" id="studentList"></div></section>
+<section id="income" class="page" hidden><h2>Income</h2><div class="card"><label>Month</label><input id="incomeMonth" type="month" onchange="renderIncome()"></div><div class="grid" id="incomeStats"></div><div class="card" id="incomeTable"></div></section>
+<section id="settings" class="page" hidden><h2>Settings & Backup</h2><div class="card"><h3>Backup</h3><p class="muted">Data is stored in this browser. Export a backup before changing phones or clearing browser data.</p><div class="actions"><button class="btn primary" onclick="exportBackup()">📤 Export backup</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">📥 Import backup</button><button class="btn secondary" onclick="exportCSV()">📄 Export CSV</button><input id="importFile" type="file" accept=".json" hidden onchange="importBackup(event)"></div></div><div class="card"><h3>Danger zone</h3><button class="btn danger" onclick="clearAll()">🗑️ Delete all planner data</button></div></section>
+</main><button class="fab" onclick="openAdd()">＋</button><nav class="bottom"><button onclick="showTab('home')">🏠<br>Home</button><button onclick="showTab('calendar')">📅<br>Calendar</button><button onclick="showTab('lessons')">📚<br>Lessons</button><button onclick="showTab('income')">💰<br>Income</button></nav><div class="modal" id="modal"><div class="modalbox" id="modalContent"></div></div>
 <script>
-const KEY='teachingPlannerV1';
-let state=JSON.parse(localStorage.getItem(KEY)||'null')||{
-students:[
-{name:'Trung',subject:'Math',price:8,duration:60,days:[2,6]},
-{name:'Jesica',subject:'Math',price:7,duration:40,days:[2]},
-{name:'Brians/Adaline',subject:'Latvian',price:18,duration:90,days:[3,5,0]},
-{name:'Hiep',subject:'Latvian',price:15,duration:90,days:[4,6]},
-{name:'Anna',subject:'Latvian',price:11,duration:90,days:[5,0]},
-{name:'Vy',subject:'Math',price:9,duration:60,days:[6]},
-{name:'An',subject:'Latvian',price:5,duration:60,days:[6,0]},
-{name:'Hieu',subject:'Latvian',price:10,duration:90,days:[0]},
-{name:'Tuong',subject:'Latvian',price:5,duration:40,days:[1,3]},
-{name:'Quan + Thu',subject:'English',price:11,duration:60,days:[1,5]}
-],lessons:[]};
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
-const dow=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-function money(x){return '€'+Number(x).toFixed(2).replace('.00','')}
-function iso(d){return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
-function dateObj(s){return new Date(s+'T12:00:00')}
-function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');renderAll()}
-function addStudent(){
-let days=[...document.querySelectorAll('#days input:checked')].map(x=>+x.value);
-let n=sName.value.trim(), sub=sSubject.value.trim(), p=+sPrice.value, dur=+sDuration.value;
-if(!n||!sub||!p||!dur||!days.length)return alert('Fill all fields and choose at least one recurring day.');
-state.students.push({name:n,subject:sub,price:p,duration:dur,days});save();sName.value=sSubject.value=sPrice.value=sDuration.value='';document.querySelectorAll('#days input').forEach(x=>x.checked=false);renderAll()
-}
-function deleteStudent(i){if(confirm('Delete this student?')){state.students.splice(i,1);save();renderAll()}}
-const recurringSlots={
-'Trung':{2:{time:'19:00',subject:'Math',price:8,duration:60},6:{time:'15:00',subject:'Math',price:8,duration:60}},
-'Jesica':{2:{time:'20:20',subject:'Math',price:7,duration:40},6:{time:'12:00',subject:'Latvian',price:7,duration:40},0:{time:'12:00',subject:'Science',price:6,duration:40}},
-'Brians/Adaline':{3:{time:'19:00',subject:'Latvian',price:18,duration:90},5:{time:'19:00',subject:'Latvian',price:18,duration:90},0:{time:'18:00',subject:'Latvian',price:18,duration:90}},
-'Hiep':{4:{time:'19:30',subject:'Latvian',price:15,duration:90},6:{time:'19:30',subject:'Latvian',price:15,duration:90}},
-'Anna':{5:{time:'17:30',subject:'Latvian',price:11,duration:90},0:{time:'16:00',subject:'Latvian',price:11,duration:90}},
-'Vy':{6:{time:'11:00',subject:'Math',price:9,duration:60}},
-'An':{6:{time:'14:00',subject:'Latvian',price:5,duration:60},0:{time:'14:00',subject:'Latvian',price:5,duration:60}},
-'Hieu':{0:{time:'09:00',subject:'Latvian',price:10,duration:90}},
-'Tuong':{1:{time:'19:15',subject:'Latvian',price:5,duration:40},3:{time:'17:10',subject:'Latvian',price:5,duration:40}},
-'Quan + Thu':{1:{time:'20:00',subject:'English',price:11,duration:60},5:{time:'16:15',subject:'English',price:11,duration:60}}
-};
-function mondayOf(d){let x=new Date(d);x.setHours(12,0,0,0);let day=x.getDay();x.setDate(x.getDate()-(day===0?6:day-1));return x}
-function dateInputValue(d){return iso(mondayOf(d))}
-function generateWeek(startDate){
-let start=mondayOf(startDate);let added=0;
-for(let i=0;i<7;i++){
- let d=new Date(start);d.setDate(start.getDate()+i);let date=iso(d),day=d.getDay();
- state.students.forEach(s=>{
-   let slot=(recurringSlots[s.name]||{})[day];
-   if(!slot || state.lessons.some(l=>l.date===date&&l.student===s.name&&l.time===slot.time)) return;
-   state.lessons.push({date,student:s.name,subject:slot.subject||s.subject,time:slot.time,duration:slot.duration||s.duration,price:slot.price??s.price,done:false,paid:false});added++;
- });
-}
-save();renderAll();return added;
-}
-function generateSelectedWeek(){let d=weekPicker.value;if(!d)return alert('Choose a Monday week first.');let added=generateWeek(dateObj(d));alert(`${added} lesson${added===1?'':'s'} added for ${d} → ${iso(new Date(dateObj(d).getTime()+6*86400000))}.`)}
-function generateRelativeWeek(offset){let d=new Date();d.setDate(d.getDate()+offset);let monday=dateInputValue(d);weekPicker.value=monday;let added=generateWeek(d);alert(`${added} lesson${added===1?'':'s'} added for ${monday} → ${iso(new Date(dateObj(monday).getTime()+6*86400000))}.`)}
-function syncWeekPicker(){ }
-function addManualLesson(){
- let date=mDate.value,time=mTime.value,student=mStudent.value,subject=mSubject.value.trim(),price=+mPrice.value,duration=+mDuration.value;
- if(!date||!time||!student||!subject||!price||!duration)return alert('Fill in date, time, student, subject, fee and duration.');
- state.lessons.push({date,time,student,subject,price,duration,done:false,paid:false});save();mSubject.value=mPrice.value=mDuration.value='';renderAll();filterDate.value=date;renderLessons();alert('Lesson added.');
-}
-function renderStudents(){
-let html='<table><tr><th>Student</th><th>Subject</th><th>Price</th><th>Duration</th><th>Days</th><th></th></tr>';
-state.students.forEach((s,i)=>html+=`<tr><td><strong>${s.name}</strong></td><td>${s.subject}</td><td>${money(s.price)}</td><td>${s.duration} min</td><td>${s.days.map(x=>dow[x]).join(', ')}</td><td><button onclick="deleteStudent(${i})">Delete</button></td></tr>`);
-studentTable.innerHTML=html+'</table>';
-}
-function renderLessons(){
-let arr=[...state.lessons].sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
-let fd=filterDate.value, fs=filterStudent.value;if(fd)arr=arr.filter(l=>l.date===fd);if(fs)arr=arr.filter(l=>l.student===fs);
-if(!arr.length)return lessonTable.innerHTML='<div class="empty">No lessons yet. Generate this week from the Dashboard.</div>';
-let html='<table><tr><th>Date</th><th>Time</th><th>Student</th><th>Subject</th><th>Fee</th><th>Done</th><th>Paid</th></tr>';
-arr.forEach((l,i)=>{let idx=state.lessons.indexOf(l);html+=`<tr><td>${l.date}</td><td>${l.time}</td><td>${l.student}</td><td>${l.subject}</td><td>${money(l.price)}</td><td><input class="check" type="checkbox" ${l.done?'checked':''} onchange="toggle(${idx},'done',this.checked)"></td><td><input class="check" type="checkbox" ${l.paid?'checked':''} onchange="toggle(${idx},'paid',this.checked)"></td></tr>`});
-lessonTable.innerHTML=html+'</table>';
-}
-function toggle(i,k,v){state.lessons[i][k]=v;save();renderAll()}
-function clearFilters(){filterDate.value='';filterStudent.value='';renderLessons()}
-function renderDash(){
-let now=new Date(), ym=iso(now).slice(0,7), arr=state.lessons.filter(l=>l.date.startsWith(ym));
-let done=arr.filter(l=>l.done), income=done.reduce((a,l)=>a+l.price,0), unpaid=done.filter(l=>!l.paid).reduce((a,l)=>a+l.price,0), mins=done.reduce((a,l)=>a+l.duration,0);
-document.getElementById('income').textContent=money(income);document.getElementById('unpaid').textContent=money(unpaid);document.getElementById('completed').textContent=done.length;document.getElementById('hours').textContent=(mins/60).toFixed(1)+'h';
-let upcoming=state.lessons.filter(l=>l.date>=iso(now)).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,12);
-dashTable.innerHTML=upcoming.length?'<table><tr><th>Date</th><th>Time</th><th>Student</th><th>Subject</th><th>Fee</th><th>Status</th></tr>'+upcoming.map(l=>`<tr><td>${l.date}</td><td>${l.time}</td><td>${l.student}</td><td>${l.subject}</td><td>${money(l.price)}</td><td><span class="badge ${l.done?'done':'pending'}">${l.done?'Completed':'Upcoming'}</span></td></tr>`).join('')+'</table>':'<div class="empty">No lessons generated yet.</div>';
-}
-let weekOffset=0;
-function renderCalendar(){
-let base=new Date();base.setDate(base.getDate()-base.getDay()+1+weekOffset*7);let end=new Date(base);end.setDate(base.getDate()+6);
-weekTitle.textContent=`${iso(base)} → ${iso(end)}`;
-let html='';for(let i=0;i<7;i++){let d=new Date(base);d.setDate(base.getDate()+i);let ds=iso(d), ls=state.lessons.filter(l=>l.date===ds).sort((a,b)=>a.time.localeCompare(b.time));html+=`<div class="day"><h3>${dow[d.getDay()]} · ${ds}</h3>`+(ls.map(l=>`<div class="lesson ${l.done?'donebox':''}"><strong>${l.time} · ${l.student}</strong>${l.subject}<br>${money(l.price)} ${l.done?'✓':''}</div>`).join('')||'<div class="sub">No lessons</div>')+'</div>'}calendarGrid.innerHTML=html;
-}
-function moveWeek(n){weekOffset+=n;renderCalendar()}
-function exportCSV(){
-let rows=[['Date','Time','Student','Subject','Duration','Fee','Completed','Paid'],...state.lessons.map(l=>[l.date,l.time,l.student,l.subject,l.duration,l.price,l.done?'Yes':'No',l.paid?'Yes':'No'])];
-let csv=rows.map(r=>r.map(x=>`"${String(x).replaceAll('"','""')}"`).join(',')).join('\\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='teaching-schedule.csv';a.click()
-}
-function renderAll(){
-let today=new Date(); if(document.getElementById('weekPicker')&&!document.getElementById('weekPicker').value)document.getElementById('weekPicker').value=dateInputValue(today);
-let ms=document.getElementById('mStudent'); if(ms){let old=ms.value;ms.innerHTML=state.students.map(s=>`<option>${s.name}</option>`).join('');if(old&&[...ms.options].some(o=>o.value===old))ms.value=old;}
-document.getElementById('days').innerHTML=dow.slice(1).map((d,i)=>`<label style="display:inline-block;margin:6px 12px 0 0"><input type="checkbox" value="${i+1}"> ${d}</label>`).join('')+'<label style="display:inline-block;margin:6px 12px 0 0"><input type="checkbox" value="0"> Sun</label>';
-let fs=document.getElementById('filterStudent');let old=fs.value;fs.innerHTML='<option value="">All students</option>'+state.students.map(s=>`<option>${s.name}</option>`).join('');fs.value=old;
-renderDash();renderStudents();renderLessons();renderCalendar()
-}
-renderAll();
-</script>
-</body>
-</html>
+const KEY='teachingPlannerV3';
+const recurring=[
+['Trung','Math',8,2,'19:00','20:00'],['Trung','Math',8,6,'15:00','16:00'],['Jesica','Math',7,2,'20:20','21:00'],['Jesica','Latvian',7,6,'12:00','12:40'],['Jesica','Science',6,0,'12:00','12:40'],['Brians/Adaline','Latvian',18,3,'19:00','20:30'],['Brians/Adaline','Latvian',18,5,'19:00','20:30'],['Brians/Adaline','Latvian',18,0,'18:00','19:30'],['Hiep','Latvian',15,4,'19:30','21:00'],['Hiep','Latvian',15,6,'19:30','21:00'],['Anna','Latvian',11,5,'17:30','19:00'],['Anna','Latvian',11,0,'16:00','17:30'],['Vy','Math',9,6,'11:00','12:00'],['An','Latvian',5,6,'14:00','15:00'],['An','Latvian',5,0,'14:00','15:00'],['Hieu','Latvian',10,0,'09:00','10:30'],['Tuong','Latvian',5,1,'19:15','19:55'],['Tuong','Latvian',5,3,'17:10','17:50'],['Quan + Thu','English',11,1,'20:00','21:00'],['Quan + Thu','English',11,5,'16:15','17:15']];
+let state=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('teachingPlannerV2')||localStorage.getItem('teachingPlannerV1')||'null')||{students:[],lessons:[]};
+if(!state.students.length)state.students=[...new Set(recurring.map(x=>x[0]))].map(name=>({name}));
+const pad=n=>String(n).padStart(2,'0'),iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`,mins=t=>{let[a,b]=t.split(':').map(Number);return a*60+b},dur=(a,b)=>(mins(b)-mins(a))/60,money=n=>'€'+Number(n||0).toFixed(2),dt=l=>new Date(l.date+'T'+l.start),id=()=>crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random();
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function save(){localStorage.setItem(KEY,JSON.stringify(state))}function f(x){return document.getElementById(x)}function monday(d){let x=new Date(d);x.setHours(12,0,0,0);let n=x.getDay();x.setDate(x.getDate()-(n===0?6:n-1));return x}function openModal(s){f('modalContent').innerHTML=s;f('modal').classList.add('show')}function closeModal(){f('modal').classList.remove('show')}f('modal').onclick=e=>{if(e.target.id==='modal')closeModal()}
+function showTab(t){document.querySelectorAll('.page').forEach(x=>x.hidden=x.id!==t);document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));if(t==='home')renderHome();if(t==='calendar')renderCalendar();if(t==='lessons')renderLessons();if(t==='students')renderStudents();if(t==='income')renderIncome()};document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>showTab(x.dataset.tab));
+function badges(l){if(l.cancelled)return '<span class="badge cancel">❌ Cancelled</span>';let s=l.done?'<span class="badge donebadge">✓ Completed</span>':'<span class="badge planned">Planned</span>';if(l.done&&!l.paid)s+='<span class="badge unpaid">💰 Unpaid</span>';if(l.done&&l.paid)s+='<span class="badge donebadge">💰 Paid</span>';return s}
+function lessonHTML(l){return `<div class="lesson ${l.done&&!l.cancelled?'done':''} ${l.cancelled?'cancelled':''}"><div class="row between"><div><h3>${esc(l.student)} — ${esc(l.subject)}</h3><div class="muted">${l.date} · ${l.start}–${l.end} · ${money(l.price)}</div></div><div>${badges(l)}</div></div>${l.cancelReason?`<div class="muted">Reason: ${esc(l.cancelReason)}</div>`:''}<div class="actions">${!l.cancelled?`<button class="btn success" onclick="toggleDone('${l.id}')">${l.done?'↩ Undo done':'✓ Done'}</button><button class="btn warning" onclick="togglePaid('${l.id}')">${l.paid?'↩ Unpaid':'💰 Paid'}</button><button class="btn danger" onclick="cancelLesson('${l.id}')">❌ Not happening</button><button class="btn secondary" onclick="reschedule('${l.id}')">↪ Reschedule</button>`:`<button class="btn secondary" onclick="uncancel('${l.id}')">↩ Restore</button>`}<button class="btn secondary" onclick="editLesson('${l.id}')">✏️ Edit</button><button class="btn danger" onclick="deleteLesson('${l.id}')">🗑️ Delete</button></div></div>`}
+function renderHome(){let now=new Date(),m=now.toISOString().slice(0,7),ls=state.lessons,month=ls.filter(l=>l.date.startsWith(m)),active=month.filter(l=>!l.cancelled),done=active.filter(l=>l.done),un=done.filter(l=>!l.paid),expected=active.reduce((s,l)=>s+Number(l.price),0),earned=done.reduce((s,l)=>s+Number(l.price),0),hours=done.reduce((s,l)=>s+dur(l.start,l.end),0);f('stats').innerHTML=[['Expected',money(expected)],['Earned',money(earned)],['Unpaid',money(un.reduce((s,l)=>s+Number(l.price),0))],['Completed',done.length+' lessons'],['Teaching hours',hours.toFixed(1)+'h']].map(x=>`<div class="stat"><span class="muted">${x[0]}</span><b>${x[1]}</b></div>`).join('');let today=iso(now),t=ls.filter(l=>l.date===today).sort((a,b)=>a.start.localeCompare(b.start));f('today').innerHTML=t.length?t.map(lessonHTML).join(''):'<div class="empty">No lessons today.</div>';let up=ls.filter(l=>!l.cancelled&&dt(l)>=now).sort((a,b)=>dt(a)-dt(b)).slice(0,5);f('upcoming').innerHTML=up.length?up.map(lessonHTML).join(''):'<div class="empty">No upcoming lessons.</div>'}
+function renderCalendar(){let p=f('weekPicker');if(!p.value)p.value=iso(monday(new Date()));let s=new Date(p.value+'T12:00');f('calendarGrid').innerHTML=[0,1,2,3,4,5,6].map(i=>{let d=new Date(s);d.setDate(d.getDate()+i);let ds=iso(d),ls=state.lessons.filter(l=>l.date===ds).sort((a,b)=>a.start.localeCompare(b.start));return `<div class="day"><div class="dayhead">${d.toLocaleDateString(undefined,{weekday:'short',day:'2-digit',month:'short'})}</div>${ls.length?ls.map(l=>`<div class="mini ${l.cancelled?'cancelled':''}" onclick="editLesson('${l.id}')"><b>${l.start}</b> ${esc(l.student)}<br><span class="muted">${esc(l.subject)} · ${money(l.price)}</span>${l.cancelled?'<br>❌ Cancelled':l.done?'<br>✓ Done':''}</div>`).join(''):'<span class="muted">No lessons</span>'}</div>`}).join('')}
+function renderLessons(){let q=(f('search').value||'').toLowerCase(),sf=f('statusFilter').value,mf=f('monthFilter').value,ls=state.lessons.filter(l=>(!q||l.student.toLowerCase().includes(q)||l.subject.toLowerCase().includes(q))&&(!mf||l.date.startsWith(mf))&&(sf==='all'||sf==='cancelled'&&l.cancelled||sf==='done'&&l.done&&!l.cancelled||sf==='unpaid'&&l.done&&!l.paid&&!l.cancelled||sf==='planned'&&!l.done&&!l.cancelled));ls.sort((a,b)=>dt(b)-dt(a));f('lessonList').innerHTML=ls.length?ls.map(lessonHTML).join(''):'<div class="empty">No lessons found.</div>'}
+function renderStudents(){let names=[...new Set([...state.students.map(s=>s.name),...state.lessons.map(l=>l.student)])].sort();f('studentList').innerHTML=names.map(n=>{let ls=state.lessons.filter(l=>l.student===n&&!l.cancelled),d=ls.filter(l=>l.done),u=d.filter(l=>!l.paid);return `<div class="lesson"><div class="row between"><div><h3>${esc(n)}</h3><span class="muted">${ls.length} active · ${d.length} completed · ${money(u.reduce((s,l)=>s+Number(l.price),0))} unpaid</span></div><button class="btn secondary" onclick="openStudent('${esc(n)}')">✏️ Edit</button></div></div>`}).join('')||'<div class="empty">No students.</div>'}
+function renderIncome(){let m=f('incomeMonth');if(!m.value)m.value=new Date().toISOString().slice(0,7);let ls=state.lessons.filter(l=>l.date.startsWith(m.value)),a=ls.filter(l=>!l.cancelled),d=a.filter(l=>l.done),p=d.filter(l=>l.paid),expected=a.reduce((s,l)=>s+Number(l.price),0),earned=d.reduce((s,l)=>s+Number(l.price),0),paid=p.reduce((s,l)=>s+Number(l.price),0);f('incomeStats').innerHTML=[['Expected',expected],['Completed',earned],['Paid',paid],['Unpaid',earned-paid]].map(x=>`<div class="stat"><span class="muted">${x[0]}</span><b>${money(x[1])}</b></div>`).join('');let names=[...new Set(ls.map(l=>l.student))].sort();f('incomeTable').innerHTML=names.length?`<table><tr><th>Student</th><th>Lessons</th><th>Completed</th><th>Paid</th><th>Unpaid</th></tr>${names.map(n=>{let x=ls.filter(l=>l.student===n&&!l.cancelled),d=x.filter(l=>l.done),p=d.filter(l=>l.paid),u=d.filter(l=>!l.paid);return `<tr><td>${esc(n)}</td><td>${x.length}</td><td>${money(d.reduce((s,l)=>s+Number(l.price),0))}</td><td>${money(p.reduce((s,l)=>s+Number(l.price),0))}</td><td>${money(u.reduce((s,l)=>s+Number(l.price),0))}</td></tr>`}).join('')}</table>`:'<div class="empty">No income records.</div>'}
+function openAdd(existing){let l=existing||{student:'',subject:'',date:iso(new Date()),start:'18:00',end:'19:00',price:0};openModal(`<h2>${existing?'Edit lesson':'Add lesson'}</h2><div class="formgrid"><div><label>Student</label><input id="fs" value="${esc(l.student)}" list="studentsDL"></div><div><label>Subject</label><input id="fsub" value="${esc(l.subject)}"></div><div><label>Price (€)</label><input id="fp" type="number" step="0.01" value="${l.price}"></div><div><label>Date</label><input id="fd" type="date" value="${l.date}"></div><div><label>Start</label><input id="fst" type="time" value="${l.start}"></div><div><label>End</label><input id="fen" type="time" value="${l.end}"></div></div><datalist id="studentsDL">${state.students.map(s=>`<option>${esc(s.name)}</option>`).join('')}</datalist><div class="actions"><button class="btn primary" onclick="saveLesson('${existing?existing.id:''}')">Save</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`)}
+function saveLesson(eid){let student=f('fs').value.trim(),subject=f('fsub').value.trim(),date=f('fd').value,start=f('fst').value,end=f('fen').value,price=Number(f('fp').value);if(!student||!subject||!date||!start||!end||mins(end)<=mins(start)){alert('Please fill all fields and use a valid time.');return}if(eid){Object.assign(state.lessons.find(l=>l.id===eid),{student,subject,date,start,end,price})}else state.lessons.push({id:id(),student,subject,date,start,end,price,done:false,paid:false,cancelled:false});if(!state.students.some(s=>s.name===student))state.students.push({name:student});save();closeModal();refresh()}
+function editLesson(i){let l=state.lessons.find(x=>x.id===i);if(l)openAdd(l)}function toggleDone(i){let l=state.lessons.find(x=>x.id===i);l.done=!l.done;if(!l.done)l.paid=false;save();refresh()}function togglePaid(i){let l=state.lessons.find(x=>x.id===i);if(!l.done&&!l.paid){alert('Mark the lesson as completed first.');return}l.paid=!l.paid;save();refresh()}
+function cancelLesson(i){let l=state.lessons.find(x=>x.id===i);openModal(`<h2>Not happening?</h2><p>${esc(l.student)} — ${esc(l.subject)}<br>${l.date} · ${l.start}–${l.end}</p><label>Reason</label><select id="reason"><option>Student cancelled</option><option>I cancelled</option><option>Rescheduled</option><option>Holiday</option><option>Other</option></select><div class="actions"><button class="btn danger" onclick="confirmCancel('${i}')">❌ Confirm cancellation</button><button class="btn secondary" onclick="closeModal()">Back</button></div>`)}function confirmCancel(i){let l=state.lessons.find(x=>x.id===i);l.cancelled=true;l.cancelReason=f('reason').value;l.done=false;l.paid=false;save();closeModal();refresh()}function uncancel(i){let l=state.lessons.find(x=>x.id===i);l.cancelled=false;l.cancelReason='';save();refresh()}
+function deleteLesson(i){let l=state.lessons.find(x=>x.id===i);if(confirm(`Delete ${l.student} — ${l.date} ${l.start}? This removes the record.`)){state.lessons=state.lessons.filter(x=>x.id!==i);save();refresh()}}
+function reschedule(i){let l=state.lessons.find(x=>x.id===i);openModal(`<h2>Reschedule lesson</h2><p>Original: ${esc(l.date)} ${l.start}–${l.end}</p><label>New date</label><input id="newDate" type="date" value="${l.date}"><div class="actions"><button class="btn primary" onclick="confirmReschedule('${i}')">↪ Reschedule</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`)}function confirmReschedule(i){let old=state.lessons.find(x=>x.id===i),nd=f('newDate').value;if(!nd)return;old.cancelled=true;old.cancelReason='Rescheduled';old.done=false;old.paid=false;state.lessons.push({...old,id:id(),date:nd,cancelled:false,cancelReason:''});save();closeModal();refresh()}
+function openStudent(name=''){openModal(`<h2>${name?'Edit student':'Add student'}</h2><label>Name</label><input id="sn" value="${esc(name)}"><div class="actions"><button class="btn primary" onclick="saveStudent('${esc(name)}')">Save</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`)}function saveStudent(old){let n=f('sn').value.trim();if(!n)return;if(old){let s=state.students.find(x=>x.name===old);if(s)s.name=n;state.lessons.forEach(l=>{if(l.student===old)l.student=n})}else if(!state.students.some(s=>s.name===n))state.students.push({name:n});save();closeModal();refresh()}
+function generateWeek(){let p=f('weekPicker'),s=new Date((p.value||iso(monday(new Date())))+'T12:00'),added=0;for(let i=0;i<7;i++){let d=new Date(s);d.setDate(d.getDate()+i);let ds=iso(d),dow=d.getDay();recurring.filter(x=>x[3]===dow).forEach(x=>{if(!state.lessons.some(l=>l.date===ds&&l.student===x[0]&&l.start===x[4])){state.lessons.push({id:id(),student:x[0],subject:x[1],price:x[2],date:ds,start:x[4],end:x[5],done:false,paid:false,cancelled:false});added++}})}save();refresh();alert(added?`Added ${added} missing lessons.`:'No lessons added — nothing was missing.')}
+function exportBackup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.download='teaching-planner-backup-'+iso(new Date())+'.json';a.click()}function importBackup(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.lessons||!x.students)throw 0;if(confirm('Replace current planner data with this backup?')){state=x;save();refresh();alert('Backup restored.')}}catch{alert('Invalid backup file.')}};r.readAsText(file)}function exportCSV(){let rows=[['Date','Start','End','Student','Subject','Price','Done','Paid','Cancelled','Reason'],...state.lessons.map(l=>[l.date,l.start,l.end,l.student,l.subject,l.price,l.done,l.paid,l.cancelled,l.cancelReason||''])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='teaching-lessons.csv';a.click()}function clearAll(){if(confirm('Delete ALL planner data? Make a backup first.')){localStorage.removeItem(KEY);location.reload()}}function refresh(){renderHome();renderCalendar();renderLessons();renderStudents();renderIncome()}
+if(!state.lessons.length){f('weekPicker').value=iso(monday(new Date()));generateWeek()}else refresh();
+</script></body></html>
