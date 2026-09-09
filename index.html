@@ -5,252 +5,44 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Teaching Planner">
 <title>Teaching Planner</title>
 <style>
-:root{--bg:#f4f6fa;--card:#fff;--text:#172033;--muted:#667085;--line:#e2e6ee;--primary:#2563eb;--green:#16a34a;--yellow:#ca8a04;--red:#dc2626;--shadow:0 3px 14px rgba(20,30,50,.07)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}.head{max-width:1200px;margin:auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:21px;font-weight:800}
-.tabs{max-width:1200px;margin:auto;display:flex;gap:7px;padding:0 18px 11px;overflow:auto}.tab{border:0;background:#eef2f7;color:var(--text);padding:9px 13px;border-radius:9px;font-weight:750;white-space:nowrap}.tab.active{background:var(--primary);color:#fff}
-.container{max-width:1200px;margin:auto;padding:18px 18px 90px}.page{animation:fade .12s ease}@keyframes fade{from{opacity:.6}to{opacity:1}}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--shadow)}.stat b{font-size:25px;display:block;margin-top:4px}.muted{color:var(--muted);font-size:13px}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px;box-shadow:var(--shadow)}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}
-.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.field{min-width:0}label{font-size:13px;font-weight:700;display:block;margin-bottom:5px}
-input,select,textarea{width:100%;padding:10px;border:1px solid #cfd5df;border-radius:9px;background:#fff;color:var(--text);font:inherit}textarea{min-height:80px;resize:vertical}
-.btn{border:0;border-radius:9px;padding:9px 12px;font-weight:750}.primary{background:var(--primary);color:#fff}.secondary{background:#edf1f6;color:var(--text)}.success{background:#dcfce7;color:#166534}.warning{background:#fef3c7;color:#92400e}.danger{background:#fee2e2;color:#991b1b}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
-.lesson{background:#fff;border:1px solid var(--line);border-left:5px solid var(--primary);border-radius:12px;padding:13px;margin:9px 0}.lesson.done{border-left-color:var(--green)}.lesson.cancelled{border-left-color:var(--red);opacity:.72}.lesson h3{margin:0 0 3px;font-size:16px}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800;margin:2px}.planned{background:#dbeafe;color:#1d4ed8}.donebadge{background:#dcfce7;color:#166534}.unpaid{background:#fef3c7;color:#92400e}.cancel{background:#fee2e2;color:#991b1b}
-.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px;min-height:190px}.dayhead{font-weight:800;padding-bottom:7px;border-bottom:1px solid var(--line)}.mini{background:#f7f9fc;border:1px solid transparent;border-radius:8px;padding:8px;margin:6px 0;cursor:pointer}.mini:hover{border-color:#b9c9f5}.mini.cancelled{text-decoration:line-through;opacity:.55}
-table{width:100%;border-collapse:collapse}th,td{padding:9px;text-align:left;border-bottom:1px solid var(--line)}.empty{text-align:center;color:var(--muted);padding:25px}
-.fab{position:fixed;right:20px;bottom:70px;width:57px;height:57px;border:0;border-radius:50%;background:var(--primary);color:#fff;font-size:27px;box-shadow:0 8px 25px #0003;z-index:25}.bottom{display:none}
-.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:16px;z-index:100}.modal.show{display:flex}.modalbox{background:#fff;width:min(620px,100%);max-height:92vh;overflow:auto;border-radius:16px;padding:19px}
-.toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#172033;color:#fff;padding:10px 14px;border-radius:10px;display:none;z-index:150}.toast.show{display:block}
-@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr 1fr}.calendar{grid-template-columns:1fr}.day{min-height:80px}.tabs{display:none}.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:30;justify-content:space-around;padding:7px}.bottom button{border:0;background:none;font-size:11px;font-weight:750}.container{padding:14px 12px 92px}.head{padding:12px}.fab{bottom:69px}}
-@media(max-width:500px){.formgrid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.stat b{font-size:21px}}
-</style>
-</head>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e5e7eb;--primary:#2563eb;--green:#16a34a;--yellow:#ca8a04;--red:#dc2626;--shadow:0 4px 18px #0000000d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.header{max-width:1200px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800;font-size:21px}.tabs{display:flex;gap:8px;overflow:auto;padding:8px 20px;max-width:1200px;margin:auto}.tab,.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer}.tab{background:#eef2ff}.tab.active,.primary{background:var(--primary);color:white}.secondary{background:#eef2f7;color:var(--text)}.success{background:#dcfce7;color:#166534}.warning{background:#fef3c7;color:#92400e}.danger{background:#fee2e2;color:#991b1b}.container{max-width:1200px;margin:auto;padding:20px 20px 90px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat,.card,.lesson,.day{background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.stat{padding:17px}.stat b{display:block;font-size:26px;margin-top:4px}.card{padding:18px;margin-top:16px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.muted{color:var(--muted);font-size:13px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label,label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}input,select{width:100%;padding:10px;border:1px solid #d5d9e2;border-radius:9px;background:#fff;font:inherit}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.lesson{padding:14px;margin:10px 0;border-left:5px solid var(--primary)}.lesson.done{border-left-color:var(--green)}.lesson.cancelled{border-left-color:var(--red);opacity:.7}.badge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:800;margin:3px}.planned{background:#dbeafe;color:#1d4ed8}.donebadge{background:#dcfce7;color:#166534}.unpaid{background:#fef3c7;color:#92400e}.cancel{background:#fee2e2;color:#991b1b}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{min-height:190px;padding:8px}.dayhead{font-weight:800;border-bottom:1px solid var(--line);padding-bottom:7px;margin-bottom:7px}.mini{font-size:12px;background:#f8fafc;border-radius:8px;padding:7px;margin:6px 0;cursor:pointer}.mini.cancelled{text-decoration:line-through;opacity:.55}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}.empty{text-align:center;color:var(--muted);padding:24px}.fab{position:fixed;right:22px;bottom:70px;width:58px;height:58px;border:0;border-radius:50%;background:var(--primary);color:#fff;font-size:28px;box-shadow:0 8px 25px #0003;z-index:20}.bottom{display:none}.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.show{display:flex}.modalbox{background:#fff;border-radius:16px;max-width:620px;width:100%;max-height:90vh;overflow:auto;padding:20px}@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr 1fr}.calendar{grid-template-columns:1fr}.day{min-height:auto}.tabs{display:none}.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:15;justify-content:space-around;padding:7px}.bottom button{border:0;background:none;font-size:12px;font-weight:700}.container{padding:15px 13px 90px}}@media(max-width:500px){.grid,.formgrid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.stat b{font-size:21px}}
+</style></head>
 <body>
-<header><div class="head"><div class="brand">📚 Teaching Planner</div><button class="btn secondary" data-action="tab" data-tab="settings">⚙️</button></div>
-<nav class="tabs">
-<button class="tab active" data-action="tab" data-tab="home">🏠 Home</button><button class="tab" data-action="tab" data-tab="calendar">📅 Calendar</button><button class="tab" data-action="tab" data-tab="lessons">📚 Lessons</button><button class="tab" data-action="tab" data-tab="students">👥 Students</button><button class="tab" data-action="tab" data-tab="income">💰 Income</button><button class="tab" data-action="tab" data-tab="settings">⚙️ Settings</button>
-</nav></header>
-
+<header><div class="header"><div class="brand">📚 Teaching Planner</div><button class="btn secondary" onclick="showTab('settings')">⚙️</button></div><div class="tabs"><button class="tab active" data-tab="home">🏠 Home</button><button class="tab" data-tab="calendar">📅 Calendar</button><button class="tab" data-tab="lessons">📚 Lessons</button><button class="tab" data-tab="students">👥 Students</button><button class="tab" data-tab="income">💰 Income</button><button class="tab" data-tab="settings">⚙️ Settings</button></div></header>
 <main class="container">
-<section id="home" class="page">
-<h2>Dashboard</h2><div class="grid" id="stats"></div>
-<div class="card"><div class="row between"><h3>Today</h3><button class="btn primary" data-action="add">＋ Add lesson</button></div><div id="today"></div></div>
-<div class="card"><h3>Upcoming</h3><div id="upcoming"></div></div>
-</section>
-
-<section id="calendar" class="page" hidden>
-<div class="row between"><div><h2>Calendar</h2><p class="muted">Click any lesson to edit it.</p></div><div class="row"><input id="weekPicker" type="date"><button class="btn primary" data-action="generate">Generate missing lessons</button></div></div>
-<div class="calendar" id="calendarGrid"></div>
-</section>
-
-<section id="lessons" class="page" hidden>
-<div class="row between"><div><h2>Lessons</h2><p class="muted">Changes are saved only after confirmation.</p></div><button class="btn primary" data-action="add">＋ Add lesson</button></div>
-<div class="card"><div class="formgrid">
-<div><label>Search</label><input id="search" placeholder="Student or subject"></div>
-<div><label>Status</label><select id="statusFilter"><option value="all">All</option><option value="planned">Planned</option><option value="done">Completed</option><option value="unpaid">Unpaid</option><option value="cancelled">Cancelled</option></select></div>
-<div><label>Month</label><input id="monthFilter" type="month"></div>
-</div></div><div id="lessonList"></div>
-</section>
-
-<section id="students" class="page" hidden>
-<div class="row between"><div><h2>Students</h2><p class="muted">Edit or remove students safely.</p></div><button class="btn primary" data-action="student-add">＋ Student</button></div>
-<div class="card" id="studentList"></div>
-</section>
-
-<section id="income" class="page" hidden>
-<h2>Income</h2><div class="card"><label>Month</label><input id="incomeMonth" type="month"></div><div class="grid" id="incomeStats"></div><div class="card" id="incomeTable"></div>
-</section>
-
-<section id="settings" class="page" hidden>
-<h2>Settings & Sync</h2>
-<div class="card"><h3>Why your phone and laptop were different</h3><p class="muted">The previous version stored data in browser storage. Your laptop and phone have separate browser storage, so changing a lesson on one device did not change the other. This version makes saving/editing safer, but true automatic syncing still requires a cloud database.</p></div>
-<div class="card"><h3>Move the latest data between devices</h3><p class="muted">Use Backup on the device with the correct data, then Restore on the other device. This transfers your complete planner.</p>
-<div class="actions"><button class="btn primary" data-action="export">📤 Export backup</button><button class="btn secondary" data-action="import">📥 Restore backup</button><button class="btn secondary" data-action="csv">📄 Export CSV</button><input id="importFile" type="file" accept=".json" hidden></div></div>
-<div class="card"><h3>Data information</h3><div id="dataInfo" class="muted"></div></div>
-<div class="card"><h3>Danger zone</h3><button class="btn danger" data-action="clear">🗑️ Delete all data</button></div>
-</section>
-</main>
-
-<button class="fab" data-action="add">＋</button>
-<nav class="bottom"><button data-action="tab" data-tab="home">🏠<br>Home</button><button data-action="tab" data-tab="calendar">📅<br>Calendar</button><button data-action="tab" data-tab="lessons">📚<br>Lessons</button><button data-action="tab" data-tab="income">💰<br>Income</button></nav>
-<div class="modal" id="modal"><div class="modalbox" id="modalContent"></div></div><div class="toast" id="toast"></div>
-
+<section id="home" class="page"><h2>Dashboard</h2><div class="grid" id="stats"></div><div class="card"><div class="row between"><h3>Today</h3><button class="btn primary" onclick="openAdd()">＋ Add lesson</button></div><div id="today"></div></div><div class="card"><h3>Upcoming</h3><div id="upcoming"></div></div></section>
+<section id="calendar" class="page" hidden><div class="row between"><div><h2>Calendar</h2><p class="muted">Generate only missing recurring lessons.</p></div><div class="row"><input id="weekPicker" type="date" onchange="renderCalendar()"><button class="btn primary" onclick="generateWeek()">Generate week</button></div></div><div class="calendar" id="calendarGrid"></div></section>
+<section id="lessons" class="page" hidden><div class="row between"><div><h2>Lessons</h2><p class="muted">Edit, complete, pay, cancel, reschedule or delete.</p></div><button class="btn primary" onclick="openAdd()">＋ Add lesson</button></div><div class="card"><div class="formgrid"><div><label>Search</label><input id="search" placeholder="Student or subject" oninput="renderLessons()"></div><div><label>Status</label><select id="statusFilter" onchange="renderLessons()"><option value="all">All</option><option value="planned">Planned</option><option value="done">Completed</option><option value="unpaid">Unpaid</option><option value="cancelled">Cancelled</option></select></div><div><label>Month</label><input id="monthFilter" type="month" onchange="renderLessons()"></div></div></div><div id="lessonList"></div></section>
+<section id="students" class="page" hidden><div class="row between"><h2>Students</h2><button class="btn primary" onclick="openStudent()">＋ Student</button></div><div class="card" id="studentList"></div></section>
+<section id="income" class="page" hidden><h2>Income</h2><div class="card"><label>Month</label><input id="incomeMonth" type="month" onchange="renderIncome()"></div><div class="grid" id="incomeStats"></div><div class="card" id="incomeTable"></div></section>
+<section id="settings" class="page" hidden><h2>Settings & Backup</h2><div class="card"><h3>Backup</h3><p class="muted">Data is stored in this browser. Export a backup before changing phones or clearing browser data.</p><div class="actions"><button class="btn primary" onclick="exportBackup()">📤 Export backup</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">📥 Import backup</button><button class="btn secondary" onclick="exportCSV()">📄 Export CSV</button><input id="importFile" type="file" accept=".json" hidden onchange="importBackup(event)"></div></div><div class="card"><h3>Danger zone</h3><button class="btn danger" onclick="clearAll()">🗑️ Delete all planner data</button></div></section>
+</main><button class="fab" onclick="openAdd()">＋</button><nav class="bottom"><button onclick="showTab('home')">🏠<br>Home</button><button onclick="showTab('calendar')">📅<br>Calendar</button><button onclick="showTab('lessons')">📚<br>Lessons</button><button onclick="showTab('income')">💰<br>Income</button></nav><div class="modal" id="modal"><div class="modalbox" id="modalContent"></div></div>
 <script>
-const KEY="teachingPlannerV4";
-const OLD_KEYS=["teachingPlannerV3","teachingPlannerV2","teachingPlannerV1"];
+const KEY='teachingPlannerV3';
 const recurring=[
-["Trung","Math",8,2,"19:00","20:00"],["Trung","Math",8,6,"15:00","16:00"],
-["Jesica","Math",7,2,"20:20","21:00"],["Jesica","Latvian",7,6,"12:00","12:40"],["Jesica","Science",6,0,"12:00","12:40"],
-["Brians/Adaline","Latvian",18,3,"19:00","20:30"],["Brians/Adaline","Latvian",18,5,"19:00","20:30"],["Brians/Adaline","Latvian",18,0,"18:00","19:30"],
-["Hiep","Latvian",15,4,"19:30","21:00"],["Hiep","Latvian",15,6,"19:30","21:00"],
-["Anna","Latvian",11,5,"17:30","19:00"],["Anna","Latvian",11,0,"16:00","17:30"],
-["Vy","Math",9,6,"11:00","12:00"],["An","Latvian",5,6,"14:00","15:00"],["An","Latvian",5,0,"14:00","15:00"],
-["Hieu","Latvian",10,0,"09:00","10:30"],["Tuong","Latvian",5,1,"19:15","19:55"],["Tuong","Latvian",5,3,"17:10","17:50"],
-["Quan + Thu","English",11,1,"20:00","21:00"],["Quan + Thu","English",11,5,"16:15","17:15"]
-];
-
-function uuid(){return (crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random().toString(16).slice(2))}
-function pad(n){return String(n).padStart(2,"0")}
-function iso(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
-function monday(d){let x=new Date(d);x.setHours(12,0,0,0);let n=x.getDay();x.setDate(x.getDate()-(n===0?6:n-1));return x}
-function mins(t){let [h,m]=t.split(":").map(Number);return h*60+m}
-function hours(a,b){return (mins(b)-mins(a))/60}
-function money(n){return "€"+Number(n||0).toFixed(2)}
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function escAttr(s){return esc(s)}
-function dt(l){return new Date(l.date+"T"+l.start)}
-function save(){state.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(state));}
-function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
-function modal(c){document.getElementById("modalContent").innerHTML=c;document.getElementById("modal").classList.add("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-function val(id){return document.getElementById(id).value}
-
-function normalize(raw){
- if(!raw)return null;
- let lessons=Array.isArray(raw.lessons)?raw.lessons:[];
- lessons=lessons.map(l=>({...l,id:l.id||uuid(),student:String(l.student||""),subject:String(l.subject||""),price:Number(l.price||0),date:l.date,start:l.start,end:l.end,done:!!l.done,paid:!!l.paid,cancelled:!!l.cancelled,cancelReason:l.cancelReason||""}));
- let names=[...(Array.isArray(raw.students)?raw.students.map(s=>typeof s==="string"?s:s.name):[]),...lessons.map(l=>l.student)].filter(Boolean);
- return {students:[...new Set(names)].map(name=>({id:uuid(),name})),lessons,updatedAt:raw.updatedAt||new Date().toISOString()};
-}
-let state=normalize(JSON.parse(localStorage.getItem(KEY)||"null"));
-if(!state){for(const k of OLD_KEYS){try{let x=normalize(JSON.parse(localStorage.getItem(k)||"null"));if(x){state=x;localStorage.setItem(KEY,JSON.stringify(state));break}}catch(e){}}}
-if(!state)state={students:[],lessons:[],updatedAt:new Date().toISOString()};
-if(!state.students.length)state.students=[...new Set(recurring.map(x=>x[0]))].map(name=>({id:uuid(),name}));
-save();
-
-function showTab(tab){
- document.querySelectorAll(".page").forEach(p=>p.hidden=p.id!==tab);
- document.querySelectorAll(".tab").forEach(p=>p.classList.toggle("active",p.dataset.tab===tab));
- if(tab==="home")renderHome();if(tab==="calendar")renderCalendar();if(tab==="lessons")renderLessons();if(tab==="students")renderStudents();if(tab==="income")renderIncome();if(tab==="settings")renderSettings();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function statusHTML(l){
- if(l.cancelled)return '<span class="badge cancel">❌ Cancelled</span>';
- if(l.done)return '<span class="badge donebadge">✓ Completed</span>';
- return '<span class="badge planned">Planned</span>';
-}
-function lessonHTML(l){
- let unpaid=l.done&&!l.paid&&!l.cancelled;
- return `<article class="lesson ${l.done&&!l.cancelled?"done":""} ${l.cancelled?"cancelled":""}">
- <div class="row between"><div><h3>${esc(l.student)} — ${esc(l.subject)}</h3><div class="muted">${esc(l.date)} · ${esc(l.start)}–${esc(l.end)} · ${money(l.price)}</div></div><div>${statusHTML(l)} ${unpaid?'<span class="badge unpaid">💰 Unpaid</span>':l.paid&&!l.cancelled?'<span class="badge donebadge">💰 Paid</span>':''}</div></div>
- ${l.cancelReason?`<div class="muted" style="margin-top:5px">Reason: ${esc(l.cancelReason)}</div>`:""}
- <div class="actions">
- ${!l.cancelled?`<button class="btn success" data-action="done" data-id="${l.id}">${l.done?"↩ Undo done":"✓ Done"}</button>
- <button class="btn warning" data-action="paid" data-id="${l.id}">${l.paid?"↩ Unpaid":"💰 Paid"}</button>
- <button class="btn danger" data-action="cancel" data-id="${l.id}">❌ Not happening</button>
- <button class="btn secondary" data-action="reschedule" data-id="${l.id}">↪ Reschedule</button>`:
- <button class="btn secondary" data-action="restore" data-id="${l.id}">↩ Restore</button>}
- <button class="btn secondary" data-action="edit" data-id="${l.id}">✏️ Edit</button>
- <button class="btn danger" data-action="delete" data-id="${l.id}">🗑️ Delete</button>
- </div></article>`;
-}
-
-function renderHome(){
- let now=new Date(), month=iso(now).slice(0,7), a=state.lessons.filter(l=>l.date.startsWith(month)), active=a.filter(l=>!l.cancelled), done=active.filter(l=>l.done), paid=done.filter(l=>l.paid);
- let expected=active.reduce((s,l)=>s+Number(l.price),0),earned=done.reduce((s,l)=>s+Number(l.price),0),unpaid=earned-paid.reduce((s,l)=>s+Number(l.price),0);
- let stats=[["Expected",money(expected)],["Earned",money(earned)],["Unpaid",money(unpaid)],["Completed",done.length+" lessons"]];
- document.getElementById("stats").innerHTML=stats.map(x=>`<div class="stat"><span class="muted">${x[0]}</span><b>${x[1]}</b></div>`).join("");
- let today=iso(now), tl=state.lessons.filter(l=>l.date===today).sort((a,b)=>a.start.localeCompare(b.start));
- document.getElementById("today").innerHTML=tl.length?tl.map(lessonHTML).join(""):'<div class="empty">No lessons today.</div>';
- let up=state.lessons.filter(l=>!l.cancelled&&dt(l)>=now).sort((a,b)=>dt(a)-dt(b)).slice(0,5);
- document.getElementById("upcoming").innerHTML=up.length?up.map(lessonHTML).join(""):'<div class="empty">No upcoming lessons.</div>';
-}
-function renderCalendar(){
- let p=document.getElementById("weekPicker");if(!p.value)p.value=iso(monday(new Date()));
- let s=new Date(p.value+"T12:00");
- let days=[...Array(7)].map((_,i)=>{let d=new Date(s);d.setDate(d.getDate()+i);return d});
- document.getElementById("calendarGrid").innerHTML=days.map(d=>{let ds=iso(d),ls=state.lessons.filter(l=>l.date===ds).sort((a,b)=>a.start.localeCompare(b.start));
- return `<div class="day"><div class="dayhead">${d.toLocaleDateString(undefined,{weekday:"short",day:"2-digit",month:"short"})}</div>${ls.length?ls.map(l=>`<div class="mini ${l.cancelled?"cancelled":""}" data-action="edit" data-id="${l.id}"><b>${esc(l.start)}</b> ${esc(l.student)}<br><span class="muted">${esc(l.subject)} · ${money(l.price)}</span><br>${l.cancelled?"❌ Cancelled":l.done?"✓ Done":"🟦 Planned"}</div>`).join(""):'<span class="muted">No lessons</span>'}</div>`}).join("");
-}
-function renderLessons(){
- let q=(document.getElementById("search").value||"").toLowerCase(),sf=val("statusFilter"),mf=val("monthFilter");
- let ls=state.lessons.filter(l=>(!q||l.student.toLowerCase().includes(q)||l.subject.toLowerCase().includes(q))&&(!mf||l.date.startsWith(mf))&&(sf==="all"||(sf==="cancelled"&&l.cancelled)||(sf==="done"&&l.done&&!l.cancelled)||(sf==="unpaid"&&l.done&&!l.paid&&!l.cancelled)||(sf==="planned"&&!l.done&&!l.cancelled)));
- ls.sort((a,b)=>dt(b)-dt(a));document.getElementById("lessonList").innerHTML=ls.length?ls.map(lessonHTML).join(""):'<div class="empty">No lessons found.</div>';
-}
-function renderStudents(){
- let names=[...new Set([...state.students.map(s=>s.name),...state.lessons.map(l=>l.student)])].filter(Boolean).sort();
- document.getElementById("studentList").innerHTML=names.length?names.map(n=>{let s=state.students.find(x=>x.name===n),ls=state.lessons.filter(l=>l.student===n&&!l.cancelled),done=ls.filter(l=>l.done),un=done.filter(l=>!l.paid).reduce((a,l)=>a+Number(l.price),0);
- return `<div class="lesson"><div class="row between"><div><h3>${esc(n)}</h3><div class="muted">${ls.length} active lessons · ${done.length} completed · ${money(un)} unpaid</div></div><div class="actions"><button class="btn secondary" data-action="student-edit" data-id="${s?s.id:""}" data-name="${escAttr(n)}">✏️ Edit</button><button class="btn danger" data-action="student-delete" data-id="${s?s.id:""}" data-name="${escAttr(n)}">🗑️ Delete</button></div></div></div>`}).join(""):'<div class="empty">No students.</div>';
-}
-function renderIncome(){
- let m=document.getElementById("incomeMonth");if(!m.value)m.value=new Date().toISOString().slice(0,7);
- let ls=state.lessons.filter(l=>l.date.startsWith(m.value)),active=ls.filter(l=>!l.cancelled),done=active.filter(l=>l.done),paid=done.filter(l=>l.paid);
- let expected=active.reduce((s,l)=>s+Number(l.price),0),earned=done.reduce((s,l)=>s+Number(l.price),0),ps=paid.reduce((s,l)=>s+Number(l.price),0);
- document.getElementById("incomeStats").innerHTML=[["Expected",expected],["Completed",earned],["Paid",ps],["Unpaid",earned-ps]].map(x=>`<div class="stat"><span class="muted">${x[0]}</span><b>${money(x[1])}</b></div>`).join("");
- let ns=[...new Set(ls.map(l=>l.student))].sort();
- document.getElementById("incomeTable").innerHTML=ns.length?`<table><tr><th>Student</th><th>Lessons</th><th>Completed</th><th>Paid</th><th>Unpaid</th></tr>${ns.map(n=>{let a=ls.filter(l=>l.student===n&&!l.cancelled),d=a.filter(l=>l.done),p=d.filter(l=>l.paid);return `<tr><td>${esc(n)}</td><td>${a.length}</td><td>${money(d.reduce((s,l)=>s+Number(l.price),0))}</td><td>${money(p.reduce((s,l)=>s+Number(l.price),0))}</td><td>${money(d.filter(l=>!l.paid).reduce((s,l)=>s+Number(l.price),0))}</td></tr>`}).join("")}</table>`:'<div class="empty">No income records.</div>';
-}
-function renderSettings(){document.getElementById("dataInfo").innerHTML=`${state.lessons.length} lessons · ${state.students.length} students · Last saved: ${new Date(state.updatedAt).toLocaleString()}`}
-
-function editLesson(id){
- let l=state.lessons.find(x=>x.id===id);if(!l)return;
- modal(`<h2>Edit lesson</h2><p class="muted">Make your changes, then press <b>Review changes</b>. Nothing is changed until you confirm.</p>
- <div class="formgrid"><div><label>Student</label><input id="fStudent" value="${escAttr(l.student)}"></div><div><label>Subject</label><input id="fSubject" value="${escAttr(l.subject)}"></div><div><label>Price (€)</label><input id="fPrice" type="number" step=".01" value="${l.price}"></div><div><label>Date</label><input id="fDate" type="date" value="${l.date}"></div><div><label>Start</label><input id="fStart" type="time" value="${l.start}"></div><div><label>End</label><input id="fEnd" type="time" value="${l.end}"></div></div>
- <div class="actions"><button class="btn primary" data-action="review-edit" data-id="${id}">Review changes</button><button class="btn secondary" data-action="close">Cancel</button></div>`);
-}
-function addLesson(){
- modal(`<h2>Add lesson</h2><p class="muted">The lesson will only be created after you confirm the details.</p>
- <div class="formgrid"><div><label>Student</label><input id="fStudent" list="studentNames"></div><div><label>Subject</label><input id="fSubject"></div><div><label>Price (€)</label><input id="fPrice" type="number" step=".01" value="0"></div><div><label>Date</label><input id="fDate" type="date" value="${iso(new Date())}"></div><div><label>Start</label><input id="fStart" type="time" value="18:00"></div><div><label>End</label><input id="fEnd" type="time" value="19:00"></div></div>
- <datalist id="studentNames">${state.students.map(s=>`<option value="${escAttr(s.name)}">`).join("")}</datalist>
- <div class="actions"><button class="btn primary" data-action="review-add">Review lesson</button><button class="btn secondary" data-action="close">Cancel</button></div>`);
-}
-function formData(){return {student:val("fStudent").trim(),subject:val("fSubject").trim(),price:Number(val("fPrice")),date:val("fDate"),start:val("fStart"),end:val("fEnd")}}
-function validForm(x){return x.student&&x.subject&&x.date&&x.start&&x.end&&x.price>=0&&mins(x.end)>mins(x.start)}
-function reviewEdit(id){
- let old=state.lessons.find(x=>x.id===id),x=formData();if(!validForm(x)){alert("Please fill all fields and use a valid time.");return}
- modal(`<h2>Confirm changes</h2><p>Are these details correct?</p><div class="card"><b>${esc(x.student)}</b><br>${esc(x.subject)} · ${money(x.price)}<br>${esc(x.date)} · ${esc(x.start)}–${esc(x.end)}</div>
- <div class="actions"><button class="btn primary" data-action="confirm-edit" data-id="${id}" data-json='${escAttr(JSON.stringify(x))}'>✓ Confirm & save</button><button class="btn secondary" data-action="edit" data-id="${id}">← Go back</button></div>`);
-}
-function confirmEdit(id,json){let x=JSON.parse(json),l=state.lessons.find(a=>a.id===id);if(!l)return;Object.assign(l,x);if(!state.students.some(s=>s.name===x.student))state.students.push({id:uuid(),name:x.student});save();closeModal();refresh();toast("Lesson changes saved")}
-function reviewAdd(){let x=formData();if(!validForm(x)){alert("Please fill all fields and use a valid time.");return}
- modal(`<h2>Confirm new lesson</h2><div class="card"><b>${esc(x.student)}</b><br>${esc(x.subject)} · ${money(x.price)}<br>${esc(x.date)} · ${esc(x.start)}–${esc(x.end)}</div><div class="actions"><button class="btn primary" data-action="confirm-add" data-json='${escAttr(JSON.stringify(x))}'>✓ Confirm & add</button><button class="btn secondary" data-action="add">← Go back</button></div>`)}
-function confirmAdd(json){let x=JSON.parse(json);state.lessons.push({id:uuid(),...x,done:false,paid:false,cancelled:false,cancelReason:""});if(!state.students.some(s=>s.name===x.student))state.students.push({id:uuid(),name:x.student});save();closeModal();refresh();toast("Lesson added")}
-function cancelLesson(id){let l=state.lessons.find(x=>x.id===id);modal(`<h2>Mark as not happening?</h2><p>${esc(l.student)} — ${esc(l.date)} ${esc(l.start)}–${esc(l.end)}</p><label>Reason</label><select id="cancelReason"><option>Student cancelled</option><option>I cancelled</option><option>Rescheduled</option><option>Holiday</option><option>Other</option></select><div class="actions"><button class="btn danger" data-action="confirm-cancel" data-id="${id}">❌ Confirm cancellation</button><button class="btn secondary" data-action="close">Back</button></div>`)}
-function confirmCancel(id){let l=state.lessons.find(x=>x.id===id);l.cancelled=true;l.cancelReason=val("cancelReason");l.done=false;l.paid=false;save();closeModal();refresh();toast("Lesson marked as not happening")}
-function deleteLesson(id){let l=state.lessons.find(x=>x.id===id);modal(`<h2>Delete lesson?</h2><p>This removes the record completely:</p><div class="card"><b>${esc(l.student)}</b><br>${esc(l.date)} · ${esc(l.start)}–${esc(l.end)}<br>${esc(l.subject)} · ${money(l.price)}</div><p class="muted">Use “Not happening” instead if you want to keep the cancelled lesson in your history.</p><div class="actions"><button class="btn danger" data-action="confirm-delete" data-id="${id}">🗑️ Yes, delete</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function confirmDelete(id){state.lessons=state.lessons.filter(l=>l.id!==id);save();closeModal();refresh();toast("Lesson deleted")}
-function toggleDone(id){let l=state.lessons.find(x=>x.id===id);if(!l)return;l.done=!l.done;if(!l.done)l.paid=false;save();refresh();toast(l.done?"Lesson completed":"Completion undone")}
-function togglePaid(id){let l=state.lessons.find(x=>x.id===id);if(!l)return;if(!l.done){alert("Complete the lesson first.");return}l.paid=!l.paid;save();refresh();toast(l.paid?"Marked paid":"Marked unpaid")}
-function restore(id){let l=state.lessons.find(x=>x.id===id);l.cancelled=false;l.cancelReason="";save();refresh();toast("Lesson restored")}
-function reschedule(id){let l=state.lessons.find(x=>x.id===id);modal(`<h2>Reschedule lesson</h2><p>Original: ${esc(l.date)} · ${esc(l.start)}–${esc(l.end)}</p><label>New date</label><input id="newDate" type="date" value="${l.date}"><div class="actions"><button class="btn primary" data-action="confirm-reschedule" data-id="${id}">Review reschedule</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function confirmReschedule(id){let l=state.lessons.find(x=>x.id===id),d=val("newDate");if(!d)return;modal(`<h2>Confirm reschedule</h2><p>Move <b>${esc(l.student)}</b> from <b>${esc(l.date)}</b> to <b>${esc(d)}</b>?</p><div class="actions"><button class="btn primary" data-action="save-reschedule" data-id="${id}" data-date="${d}">✓ Confirm</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function saveReschedule(id,d){let old=state.lessons.find(x=>x.id===id);old.cancelled=true;old.cancelReason="Rescheduled";old.done=false;old.paid=false;state.lessons.push({...old,id:uuid(),date:d,cancelled:false,cancelReason:""});save();closeModal();refresh();toast("Lesson rescheduled")}
-function studentModal(id,name){let s=id?state.students.find(x=>x.id===id):null;modal(`<h2>${id?"Edit student":"Add student"}</h2><label>Name</label><input id="studentName" value="${escAttr(s?s.name:name||"")}"><div class="actions"><button class="btn primary" data-action="${id?"student-review-edit":"student-review-add"}" data-id="${id||""}">Review</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function studentReviewAdd(){let n=val("studentName").trim();if(!n)return alert("Enter a student name.");if(state.students.some(s=>s.name.toLowerCase()===n.toLowerCase()))return alert("That student already exists.");modal(`<h2>Confirm student</h2><div class="card"><b>${esc(n)}</b></div><div class="actions"><button class="btn primary" data-action="student-confirm-add" data-name="${escAttr(n)}">✓ Add student</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function studentReviewEdit(id){let s=state.students.find(x=>x.id===id),n=val("studentName").trim();if(!s||!n)return;if(state.students.some(x=>x.id!==id&&x.name.toLowerCase()===n.toLowerCase()))return alert("Another student already has that name.");modal(`<h2>Confirm student change</h2><p>Rename <b>${esc(s.name)}</b> to <b>${esc(n)}</b>?</p><div class="actions"><button class="btn primary" data-action="student-confirm-edit" data-id="${id}" data-name="${escAttr(n)}">✓ Confirm & save</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function studentConfirmAdd(n){state.students.push({id:uuid(),name:n});save();closeModal();refresh();toast("Student added")}
-function studentConfirmEdit(id,n){let s=state.students.find(x=>x.id===id),old=s.name;s.name=n;state.lessons.forEach(l=>{if(l.student===old)l.student=n});save();closeModal();refresh();toast("Student changes saved")}
-function studentDelete(id,name){let s=state.students.find(x=>x.id===id);modal(`<h2>Delete student?</h2><p>Delete <b>${esc(name)}</b> from the student list?</p><p class="muted">Existing lesson records will be kept. If you want to remove those too, delete the lessons separately.</p><div class="actions"><button class="btn danger" data-action="student-confirm-delete" data-id="${id}">🗑️ Delete student</button><button class="btn secondary" data-action="close">Cancel</button></div>`)}
-function studentConfirmDelete(id){state.students=state.students.filter(s=>s.id!==id);save();closeModal();refresh();toast("Student deleted from list")}
-
-function generateWeek(){
- let p=document.getElementById("weekPicker"),s=new Date((p.value||iso(monday(new Date())))+"T12:00"),added=0;
- for(let i=0;i<7;i++){let d=new Date(s);d.setDate(d.getDate()+i);let ds=iso(d),dow=d.getDay();recurring.filter(x=>x[3]===dow).forEach(x=>{if(!state.lessons.some(l=>l.date===ds&&l.student===x[0]&&l.start===x[4])){state.lessons.push({id:uuid(),student:x[0],subject:x[1],price:x[2],date:ds,start:x[4],end:x[5],done:false,paid:false,cancelled:false,cancelReason:""});added++}})}
- save();refresh();toast(added?`Added ${added} missing lessons`:"No missing lessons")}
-function exportBackup(){let blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`teaching-planner-backup-${iso(new Date())}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function importBackup(){document.getElementById("importFile").click()}
-function handleImport(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=normalize(JSON.parse(r.result));if(!x||!x.lessons)throw 0;modal(`<h2>Confirm restore</h2><p>Replace the data on this device with <b>${x.lessons.length} lessons</b> and <b>${x.students.length} students</b> from the backup?</p><p class="muted">This will overwrite the current data on this device.</p><div class="actions"><button class="btn primary" id="restoreNow">✓ Replace with backup</button><button class="btn secondary" data-action="close">Cancel</button></div>`);document.getElementById("restoreNow").onclick=()=>{state=x;save();closeModal();refresh();toast("Backup restored")}}catch{alert("That file is not a valid Teaching Planner backup.")}e.target.value=""};r.readAsText(file)}
-function exportCSV(){let rows=[["Date","Start","End","Student","Subject","Price","Done","Paid","Cancelled","Reason"],...state.lessons.map(l=>[l.date,l.start,l.end,l.student,l.subject,l.price,l.done,l.paid,l.cancelled,l.cancelReason||""])];let csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\\n"),a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="teaching-lessons.csv";a.click()}
-function clearAll(){modal(`<h2>Delete all planner data?</h2><p>This will remove every lesson and student from this device.</p><div class="actions"><button class="btn danger" id="reallyClear">🗑️ Delete everything</button><button class="btn secondary" data-action="close">Cancel</button></div>`);document.getElementById("reallyClear").onclick=()=>{state={students:[],lessons:[],updatedAt:new Date().toISOString()};save();closeModal();refresh();toast("All data deleted")}}
-function refresh(){renderHome();renderCalendar();renderLessons();renderStudents();renderIncome();renderSettings()}
-
-document.addEventListener("click",e=>{
- let b=e.target.closest("[data-action]");if(!b)return;let a=b.dataset.action,id=b.dataset.id;
- if(a==="tab")showTab(b.dataset.tab);else if(a==="add")addLesson();else if(a==="edit")editLesson(id);else if(a==="done")toggleDone(id);else if(a==="paid")togglePaid(id);else if(a==="cancel")cancelLesson(id);else if(a==="delete")deleteLesson(id);else if(a==="restore")restore(id);else if(a==="reschedule")reschedule(id);else if(a==="confirm-cancel")confirmCancel(id);else if(a==="confirm-delete")confirmDelete(id);else if(a==="review-edit")reviewEdit(id);else if(a==="confirm-edit")confirmEdit(id,b.dataset.json);else if(a==="review-add")reviewAdd();else if(a==="confirm-add")confirmAdd(b.dataset.json);else if(a==="confirm-reschedule")confirmReschedule(id);else if(a==="save-reschedule")saveReschedule(id,b.dataset.date);else if(a==="student-add")studentModal();else if(a==="student-edit")studentModal(id,b.dataset.name);else if(a==="student-delete")studentDelete(id,b.dataset.name);else if(a==="student-review-add")studentReviewAdd();else if(a==="student-review-edit")studentReviewEdit(id);else if(a==="student-confirm-add")studentConfirmAdd(b.dataset.name);else if(a==="student-confirm-edit")studentConfirmEdit(id,b.dataset.name);else if(a==="student-confirm-delete")studentConfirmDelete(id);else if(a==="generate")generateWeek();else if(a==="export")exportBackup();else if(a==="import")importBackup();else if(a==="csv")exportCSV();else if(a==="clear")clearAll();else if(a==="close")closeModal();
-});
-document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
-document.getElementById("weekPicker").addEventListener("change",renderCalendar);
-document.getElementById("search").addEventListener("input",renderLessons);
-document.getElementById("statusFilter").addEventListener("change",renderLessons);
-document.getElementById("monthFilter").addEventListener("change",renderLessons);
-document.getElementById("incomeMonth").addEventListener("change",renderIncome);
-document.getElementById("importFile").addEventListener("change",handleImport);
-document.getElementById("weekPicker").value=iso(monday(new Date()));
-refresh();
-</script>
-</body></html>
+['Trung','Math',8,2,'19:00','20:00'],['Trung','Math',8,6,'15:00','16:00'],['Jesica','Math',7,2,'20:20','21:00'],['Jesica','Latvian',7,6,'12:00','12:40'],['Jesica','Science',6,0,'12:00','12:40'],['Brians/Adaline','Latvian',18,3,'19:00','20:30'],['Brians/Adaline','Latvian',18,5,'19:00','20:30'],['Brians/Adaline','Latvian',18,0,'18:00','19:30'],['Hiep','Latvian',15,4,'19:30','21:00'],['Hiep','Latvian',15,6,'19:30','21:00'],['Anna','Latvian',11,5,'17:30','19:00'],['Anna','Latvian',11,0,'16:00','17:30'],['Vy','Math',9,6,'11:00','12:00'],['An','Latvian',5,6,'14:00','15:00'],['An','Latvian',5,0,'14:00','15:00'],['Hieu','Latvian',10,0,'09:00','10:30'],['Tuong','Latvian',5,1,'19:15','19:55'],['Tuong','Latvian',5,3,'17:10','17:50'],['Quan + Thu','English',11,1,'20:00','21:00'],['Quan + Thu','English',11,5,'16:15','17:15']];
+let state=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('teachingPlannerV2')||localStorage.getItem('teachingPlannerV1')||'null')||{students:[],lessons:[]};
+if(!state.students.length)state.students=[...new Set(recurring.map(x=>x[0]))].map(name=>({name}));
+const pad=n=>String(n).padStart(2,'0'),iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`,mins=t=>{let[a,b]=t.split(':').map(Number);return a*60+b},dur=(a,b)=>(mins(b)-mins(a))/60,money=n=>'€'+Number(n||0).toFixed(2),dt=l=>new Date(l.date+'T'+l.start),id=()=>crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random();
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function save(){localStorage.setItem(KEY,JSON.stringify(state))}function f(x){return document.getElementById(x)}function monday(d){let x=new Date(d);x.setHours(12,0,0,0);let n=x.getDay();x.setDate(x.getDate()-(n===0?6:n-1));return x}function openModal(s){f('modalContent').innerHTML=s;f('modal').classList.add('show')}function closeModal(){f('modal').classList.remove('show')}f('modal').onclick=e=>{if(e.target.id==='modal')closeModal()}
+function showTab(t){document.querySelectorAll('.page').forEach(x=>x.hidden=x.id!==t);document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));if(t==='home')renderHome();if(t==='calendar')renderCalendar();if(t==='lessons')renderLessons();if(t==='students')renderStudents();if(t==='income')renderIncome()};document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>showTab(x.dataset.tab));
+function badges(l){if(l.cancelled)return '<span class="badge cancel">❌ Cancelled</span>';let s=l.done?'<span class="badge donebadge">✓ Completed</span>':'<span class="badge planned">Planned</span>';if(l.done&&!l.paid)s+='<span class="badge unpaid">💰 Unpaid</span>';if(l.done&&l.paid)s+='<span class="badge donebadge">💰 Paid</span>';return s}
+function lessonHTML(l){return `<div class="lesson ${l.done&&!l.cancelled?'done':''} ${l.cancelled?'cancelled':''}"><div class="row between"><div><h3>${esc(l.student)} — ${esc(l.subject)}</h3><div class="muted">${l.date} · ${l.start}–${l.end} · ${money(l.price)}</div></div><div>${badges(l)}</div></div>${l.cancelReason?`<div class="muted">Reason: ${esc(l.cancelReason)}</div>`:''}<div class="actions">${!l.cancelled?`<button class="btn success" onclick="toggleDone('${l.id}')">${l.done?'↩ Undo done':'✓ Done'}</button><button class="btn warning" onclick="togglePaid('${l.id}')">${l.paid?'↩ Unpaid':'💰 Paid'}</button><button class="btn danger" onclick="cancelLesson('${l.id}')">❌ Not happening</button><button class="btn secondary" onclick="reschedule('${l.id}')">↪ Reschedule</button>`:`<button class="btn secondary" onclick="uncancel('${l.id}')">↩ Restore</button>`}<button class="btn secondary" onclick="editLesson('${l.id}')">✏️ Edit</button><button class="btn danger" onclick="deleteLesson('${l.id}')">🗑️ Delete</button></div></div>`}
+function renderHome(){let now=new Date(),m=now.toISOString().slice(0,7),ls=state.lessons,month=ls.filter(l=>l.date.startsWith(m)),active=month.filter(l=>!l.cancelled),done=active.filter(l=>l.done),un=done.filter(l=>!l.paid),expected=active.reduce((s,l)=>s+Number(l.price),0),earned=done.reduce((s,l)=>s+Number(l.price),0),hours=done.reduce((s,l)=>s+dur(l.start,l.end),0);f('stats').innerHTML=[['Expected',money(expected)],['Earned',money(earned)],['Unpaid',money(un.reduce((s,l)=>s+Number(l.price),0))],['Completed',done.length+' lessons'],['Teaching hours',hours.toFixed(1)+'h']].map(x=>`<div class="stat"><span class="muted">${x[0]}</span><b>${x[1]}</b></div>`).join('');let today=iso(now),t=ls.filter(l=>l.date===today).sort((a,b)=>a.start.localeCompare(b.start));f('today').innerHTML=t.length?t.map(lessonHTML).join(''):'<div class="empty">No lessons today.</div>';let up=ls.filter(l=>!l.cancelled&&dt(l)>=now).sort((a,b)=>dt(a)-dt(b)).slice(0,5);f('upcoming').innerHTML=up.length?up.map(lessonHTML).join(''):'<div class="empty">No upcoming lessons.</div>'}
+function renderCalendar(){let p=f('weekPicker');if(!p.value)p.value=iso(monday(new Date()));let s=new Date(p.value+'T12:00');f('calendarGrid').innerHTML=[0,1,2,3,4,5,6].map(i=>{let d=new Date(s);d.setDate(d.getDate()+i);let ds=iso(d),ls=state.lessons.filter(l=>l.date===ds).sort((a,b)=>a.start.localeCompare(b.start));return `<div class="day"><div class="dayhead">${d.toLocaleDateString(undefined,{weekday:'short',day:'2-digit',month:'short'})}</div>${ls.length?ls.map(l=>`<div class="mini ${l.cancelled?'cancelled':''}" onclick="editLesson('${l.id}')"><b>${l.start}</b> ${esc(l.student)}<br><span class="muted">${esc(l.subject)} · ${money(l.price)}</span>${l.cancelled?'<br>❌ Cancelled':l.done?'<br>✓ Done':''}</div>`).join(''):'<span class="muted">No lessons</span>'}</div>`}).join('')}
+function renderLessons(){let q=(f('search').value||'').toLowerCase(),sf=f('statusFilter').value,mf=f('monthFilter').value,ls=state.lessons.filter(l=>(!q||l.student.toLowerCase().includes(q)||l.subject.toLowerCase().includes(q))&&(!mf||l.date.startsWith(mf))&&(sf==='all'||sf==='cancelled'&&l.cancelled||sf==='done'&&l.done&&!l.cancelled||sf==='unpaid'&&l.done&&!l.paid&&!l.cancelled||sf==='planned'&&!l.done&&!l.cancelled));ls.sort((a,b)=>dt(b)-dt(a));f('lessonList').innerHTML=ls.length?ls.map(lessonHTML).join(''):'<div class="empty">No lessons found.</div>'}
+function renderStudents(){let names=[...new Set([...state.students.map(s=>s.name),...state.lessons.map(l=>l.student)])].sort();f('studentList').innerHTML=names.map(n=>{let ls=state.lessons.filter(l=>l.student===n&&!l.cancelled),d=ls.filter(l=>l.done),u=d.filter(l=>!l.paid);return `<div class="lesson"><div class="row between"><div><h3>${esc(n)}</h3><span class="muted">${ls.length} active · ${d.length} completed · ${money(u.reduce((s,l)=>s+Number(l.price),0))} unpaid</span></div><button class="btn secondary" onclick="openStudent('${esc(n)}')">✏️ Edit</button></div></div>`}).join('')||'<div class="empty">No students.</div>'}
+function renderIncome(){let m=f('incomeMonth');if(!m.value)m.value=new Date().toISOString().slice(0,7);let ls=state.lessons.filter(l=>l.date.startsWith(m.value)),a=ls.filter(l=>!l.cancelled),d=a.filter(l=>l.done),p=d.filter(l=>l.paid),expected=a.reduce((s,l)=>s+Number(l.price),0),earned=d.reduce((s,l)=>s+Number(l.price),0),paid=p.reduce((s,l)=>s+Number(l.price),0);f('incomeStats').innerHTML=[['Expected',expected],['Completed',earned],['Paid',paid],['Unpaid',earned-paid]].map(x=>`<div class="stat"><span class="muted">${x[0]}</span><b>${money(x[1])}</b></div>`).join('');let names=[...new Set(ls.map(l=>l.student))].sort();f('incomeTable').innerHTML=names.length?`<table><tr><th>Student</th><th>Lessons</th><th>Completed</th><th>Paid</th><th>Unpaid</th></tr>${names.map(n=>{let x=ls.filter(l=>l.student===n&&!l.cancelled),d=x.filter(l=>l.done),p=d.filter(l=>l.paid),u=d.filter(l=>!l.paid);return `<tr><td>${esc(n)}</td><td>${x.length}</td><td>${money(d.reduce((s,l)=>s+Number(l.price),0))}</td><td>${money(p.reduce((s,l)=>s+Number(l.price),0))}</td><td>${money(u.reduce((s,l)=>s+Number(l.price),0))}</td></tr>`}).join('')}</table>`:'<div class="empty">No income records.</div>'}
+function openAdd(existing){let l=existing||{student:'',subject:'',date:iso(new Date()),start:'18:00',end:'19:00',price:0};openModal(`<h2>${existing?'Edit lesson':'Add lesson'}</h2><div class="formgrid"><div><label>Student</label><input id="fs" value="${esc(l.student)}" list="studentsDL"></div><div><label>Subject</label><input id="fsub" value="${esc(l.subject)}"></div><div><label>Price (€)</label><input id="fp" type="number" step="0.01" value="${l.price}"></div><div><label>Date</label><input id="fd" type="date" value="${l.date}"></div><div><label>Start</label><input id="fst" type="time" value="${l.start}"></div><div><label>End</label><input id="fen" type="time" value="${l.end}"></div></div><datalist id="studentsDL">${state.students.map(s=>`<option>${esc(s.name)}</option>`).join('')}</datalist><div class="actions"><button class="btn primary" onclick="saveLesson('${existing?existing.id:''}')">Save</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`)}
+function saveLesson(eid){let student=f('fs').value.trim(),subject=f('fsub').value.trim(),date=f('fd').value,start=f('fst').value,end=f('fen').value,price=Number(f('fp').value);if(!student||!subject||!date||!start||!end||mins(end)<=mins(start)){alert('Please fill all fields and use a valid time.');return}if(eid){Object.assign(state.lessons.find(l=>l.id===eid),{student,subject,date,start,end,price})}else state.lessons.push({id:id(),student,subject,date,start,end,price,done:false,paid:false,cancelled:false});if(!state.students.some(s=>s.name===student))state.students.push({name:student});save();closeModal();refresh()}
+function editLesson(i){let l=state.lessons.find(x=>x.id===i);if(l)openAdd(l)}function toggleDone(i){let l=state.lessons.find(x=>x.id===i);l.done=!l.done;if(!l.done)l.paid=false;save();refresh()}function togglePaid(i){let l=state.lessons.find(x=>x.id===i);if(!l.done&&!l.paid){alert('Mark the lesson as completed first.');return}l.paid=!l.paid;save();refresh()}
+function cancelLesson(i){let l=state.lessons.find(x=>x.id===i);openModal(`<h2>Not happening?</h2><p>${esc(l.student)} — ${esc(l.subject)}<br>${l.date} · ${l.start}–${l.end}</p><label>Reason</label><select id="reason"><option>Student cancelled</option><option>I cancelled</option><option>Rescheduled</option><option>Holiday</option><option>Other</option></select><div class="actions"><button class="btn danger" onclick="confirmCancel('${i}')">❌ Confirm cancellation</button><button class="btn secondary" onclick="closeModal()">Back</button></div>`)}function confirmCancel(i){let l=state.lessons.find(x=>x.id===i);l.cancelled=true;l.cancelReason=f('reason').value;l.done=false;l.paid=false;save();closeModal();refresh()}function uncancel(i){let l=state.lessons.find(x=>x.id===i);l.cancelled=false;l.cancelReason='';save();refresh()}
+function deleteLesson(i){let l=state.lessons.find(x=>x.id===i);if(confirm(`Delete ${l.student} — ${l.date} ${l.start}? This removes the record.`)){state.lessons=state.lessons.filter(x=>x.id!==i);save();refresh()}}
+function reschedule(i){let l=state.lessons.find(x=>x.id===i);openModal(`<h2>Reschedule lesson</h2><p>Original: ${esc(l.date)} ${l.start}–${l.end}</p><label>New date</label><input id="newDate" type="date" value="${l.date}"><div class="actions"><button class="btn primary" onclick="confirmReschedule('${i}')">↪ Reschedule</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`)}function confirmReschedule(i){let old=state.lessons.find(x=>x.id===i),nd=f('newDate').value;if(!nd)return;old.cancelled=true;old.cancelReason='Rescheduled';old.done=false;old.paid=false;state.lessons.push({...old,id:id(),date:nd,cancelled:false,cancelReason:''});save();closeModal();refresh()}
+function openStudent(name=''){openModal(`<h2>${name?'Edit student':'Add student'}</h2><label>Name</label><input id="sn" value="${esc(name)}"><div class="actions"><button class="btn primary" onclick="saveStudent('${esc(name)}')">Save</button><button class="btn secondary" onclick="closeModal()">Cancel</button></div>`)}function saveStudent(old){let n=f('sn').value.trim();if(!n)return;if(old){let s=state.students.find(x=>x.name===old);if(s)s.name=n;state.lessons.forEach(l=>{if(l.student===old)l.student=n})}else if(!state.students.some(s=>s.name===n))state.students.push({name:n});save();closeModal();refresh()}
+function generateWeek(){let p=f('weekPicker'),s=new Date((p.value||iso(monday(new Date())))+'T12:00'),added=0;for(let i=0;i<7;i++){let d=new Date(s);d.setDate(d.getDate()+i);let ds=iso(d),dow=d.getDay();recurring.filter(x=>x[3]===dow).forEach(x=>{if(!state.lessons.some(l=>l.date===ds&&l.student===x[0]&&l.start===x[4])){state.lessons.push({id:id(),student:x[0],subject:x[1],price:x[2],date:ds,start:x[4],end:x[5],done:false,paid:false,cancelled:false});added++}})}save();refresh();alert(added?`Added ${added} missing lessons.`:'No lessons added — nothing was missing.')}
+function exportBackup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.download='teaching-planner-backup-'+iso(new Date())+'.json';a.click()}function importBackup(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.lessons||!x.students)throw 0;if(confirm('Replace current planner data with this backup?')){state=x;save();refresh();alert('Backup restored.')}}catch{alert('Invalid backup file.')}};r.readAsText(file)}function exportCSV(){let rows=[['Date','Start','End','Student','Subject','Price','Done','Paid','Cancelled','Reason'],...state.lessons.map(l=>[l.date,l.start,l.end,l.student,l.subject,l.price,l.done,l.paid,l.cancelled,l.cancelReason||''])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='teaching-lessons.csv';a.click()}function clearAll(){if(confirm('Delete ALL planner data? Make a backup first.')){localStorage.removeItem(KEY);location.reload()}}function refresh(){renderHome();renderCalendar();renderLessons();renderStudents();renderIncome()}
+if(!state.lessons.length){f('weekPicker').value=iso(monday(new Date()));generateWeek()}else refresh();
+</script></body></html>
